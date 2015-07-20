@@ -20,7 +20,8 @@ module.exports = function(grunt) {
     var options = this.options({
       jsDir: "",
       cssDir: "",
-      minify: false
+      minify: false,
+      includeTag: ""
     }); 
 
     options.cssTags = this.options().cssTags || {
@@ -49,7 +50,7 @@ module.exports = function(grunt) {
 
       grunt.log.writeln('Reading: ' + path.resolve(filePair.src.toString()));
 
-      $('link[rel="stylesheet"]').each(function () {
+      $('link[rel="stylesheet"]' + options.includeTag).each(function () {
         var style = $(this).attr('href');
         if(!style) { return; }
         if(style.match(/^\/\//)) { return; }
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
         $(this).replaceWith(options.cssTags.start + processInput(grunt.file.read(filePath)) + options.cssTags.end);
       });
 
-      $('script').each(function () {
+      $('script' + options.includeTag).each(function () {
         var script = $(this).attr('src');
         if(!script) { return; }
         if(script.match(/^\/\//)) { return; }
