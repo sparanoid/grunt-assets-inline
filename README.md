@@ -83,6 +83,7 @@ grunt.initConfig({
   },
 });
 ```
+
 **Example**
 
 If the local cwd for your uncompiled file is `/Library/documents/server/src/html` then the above settings would resolve:
@@ -91,9 +92,28 @@ If the local cwd for your uncompiled file is `/Library/documents/server/src/html
 
 `<link href="/assets/css/styles.css" />` will use a local file at `/Library/documents/sharedAssets/assets/css/styles.css`
 
+#### Ignore images
+
+IF you want to smoosh `img` sources to Base64 in HTML, you can set `ignoreImg` to false
+
+```js
+grunt.initConfig({
+  smoosher: {
+    all: {
+      options: {
+        ignoreImg: false
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
 #### cssTags
 
-Defaults to 
+Defaults to
 
 ```js
 {
@@ -104,7 +124,7 @@ Defaults to
 
 #### jsTags
 
-Defaults to 
+Defaults to
 
 ```js
 {
