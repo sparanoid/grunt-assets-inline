@@ -138,4 +138,6 @@ Defaults to
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+- 2015-07-28   v0.1.4   Add `ignoreImg` support
+- 2015-07-20   v0.1.3   Add `includeTag` support, only selected files will be smooshed if this option is defined
