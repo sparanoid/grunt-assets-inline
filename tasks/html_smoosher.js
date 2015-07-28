@@ -21,6 +21,7 @@ module.exports = function(grunt) {
       jsDir: "",
       cssDir: "",
       minify: false,
+      ignoreImg: true,
       includeTag: ""
     });
 
@@ -91,13 +92,15 @@ module.exports = function(grunt) {
         $(this).replaceWith(options.jsTags.start + processInput(grunt.file.read(filePath)) + options.jsTags.end);
       });
 
-      $('img').each(function () {
-        var src = $(this).attr('src');
-        if (!src) { return; }
-        if (src.match(/^\/\//)) { return; }
-        if (url.parse(src).protocol) { return; }
-        $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(path.join(path.dirname(filePair.src), src), { encoding: null })).toString('base64'));
-      });
+      if (!options.ignoreImg) {
+        $('img').each(function () {
+          var src = $(this).attr('src');
+          if (!src) { return; }
+          if (src.match(/^\/\//)) { return; }
+          if (url.parse(src).protocol) { return; }
+          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(path.join(path.dirname(filePair.src), src), { encoding: null })).toString('base64'));
+        });
+      }
 
       var html = $.html();
       // replace relative path
