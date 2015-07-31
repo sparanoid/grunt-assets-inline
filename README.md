@@ -159,6 +159,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 2015-07-31   v0.1.6   Fix test and new default for `assetsUrlPrefix`
 - 2015-07-31   v0.1.5   Add `assetsUrlPrefix` support for fixing relative assets URLs in smooshed CSS
 - 2015-07-28   v0.1.4   Add `ignoreImg` support
 - 2015-07-20   v0.1.3   Add `includeTag` support, only selected files will be smooshed if this option is defined
