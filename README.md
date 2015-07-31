@@ -1,6 +1,5 @@
 # grunt-html-smoosher
-[![Build Status](https://api.travis-ci.org/motherjones/grunt-html-smoosher.png?branch=master)](https://travis-ci.org/motherjones/grunt-html-smoosher)
-[![NPM version](https://badge.fury.io/js/grunt-html-smoosher.png)](http://badge.fury.io/js/grunt-html-smoosher)
+[![Build Status](https://api.travis-ci.org/motherjones/grunt-html-smoosher.svg?branch=master)](https://travis-ci.org/motherjones/grunt-html-smoosher)
 
 > A grunt task which takes a html file, finds all the css and js links, and outputs a version with all the css and js written inline for ease of pasting into a cms
 
@@ -112,14 +111,6 @@ grunt.initConfig({
 ```
 
 #### Additional Assets URL Prefix
-
-Defaults to
-
-```js
-{
-  assetsUrlPrefix: '../'
-}
-```
 
 If `ignoreImg` is set to false (by default) and you have assets in CSS (for example images, fonts, SVGs), smooshing CSS into HTML may break relative URLs, so you may have to replace the original URLs to absolute URLs.
 

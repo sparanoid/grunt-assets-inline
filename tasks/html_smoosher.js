@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       minify: false,
       ignoreImg: true,
       includeTag: "",
-      assetsUrlPrefix: "../"
+      assetsUrlPrefix: ""
     });
 
     options.cssTags = this.options().cssTags || {
