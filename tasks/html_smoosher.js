@@ -22,7 +22,8 @@ module.exports = function(grunt) {
       cssDir: "",
       minify: false,
       ignoreImg: true,
-      includeTag: ""
+      includeTag: "",
+      assetsUrlPrefix: "../"
     });
 
     options.cssTags = this.options().cssTags || {
@@ -104,7 +105,7 @@ module.exports = function(grunt) {
 
       var html = $.html();
       // replace relative path
-      html = html.replace(/[.]{2}\//g, '');
+      html = html.replace(/[.]{2}\//g, options.assetsUrlPrefix);
       grunt.file.write(path.resolve(filePair.dest), html);
       grunt.log.writeln(('Created ').green + path.resolve(filePair.dest));
     });

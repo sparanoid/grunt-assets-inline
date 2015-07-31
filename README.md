@@ -94,7 +94,7 @@ If the local cwd for your uncompiled file is `/Library/documents/server/src/html
 
 #### Ignore images
 
-IF you want to smoosh `img` sources to Base64 in HTML, you can set `ignoreImg` to false
+If you want to smoosh `img` sources to Base64 in HTML, you can set `ignoreImg` to false
 
 ```js
 grunt.initConfig({
@@ -102,6 +102,35 @@ grunt.initConfig({
     all: {
       options: {
         ignoreImg: false
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
+#### Additional Assets URL Prefix
+
+Defaults to
+
+```js
+{
+  assetsUrlPrefix: '../'
+}
+```
+
+If `ignoreImg` is false and you have assets in CSS (for example images, fonts, SVGs), smooshing CSS into HTML may break relative URLs, so you may have to replace the original URLs to absolute URLs.
+
+This options only search for URLs begins with `../`.
+
+```js
+grunt.initConfig({
+  smoosher: {
+    all: {
+      options: {
+        assetsUrlPrefix: '<%= config.base %>/assets/'
       },
       files: {
         'dest-index.html': 'source-index.html',
