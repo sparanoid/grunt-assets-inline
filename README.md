@@ -121,9 +121,9 @@ Defaults to
 }
 ```
 
-If `ignoreImg` is false and you have assets in CSS (for example images, fonts, SVGs), smooshing CSS into HTML may break relative URLs, so you may have to replace the original URLs to absolute URLs.
+If `ignoreImg` is set to false (by default) and you have assets in CSS (for example images, fonts, SVGs), smooshing CSS into HTML may break relative URLs, so you may have to replace the original URLs to absolute URLs.
 
-This options only search for URLs begins with `../`.
+This option only searchs for URLs begin with `../`.
 
 ```js
 grunt.initConfig({
