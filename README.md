@@ -3,6 +3,8 @@
 
 > A grunt task which takes a html file, finds all the css, js links and images, and outputs a version with all the css, js and images (Base64) written inline.
 
+This is a fork of original [grunt-html-smoosher](https://github.com/motherjones/grunt-html-smoosher) by [Ben Breedlove](https://github.com/benbreedlove) with fixes and new features.
+
 ## Getting Started
 
 This plugin requires Grunt `~0.4.1`
