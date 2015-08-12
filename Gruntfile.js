@@ -35,6 +35,78 @@ module.exports = function(grunt) {
           'tmp/default_options': 'test/fixtures/index.html',
         },
       },
+      minify: {
+        options: {
+          minify: false,
+          inlineImg: false,
+          inlineSvg: false,
+          inlineSvgBase64: false
+        },
+        files: {
+          'tmp/minify': 'test/fixtures/index.html',
+        },
+      },
+      inline_img: {
+        options: {
+          minify: false,
+          inlineImg: true,
+          inlineSvg: false,
+          inlineSvgBase64: false
+        },
+        files: {
+          'tmp/inline_img': 'test/fixtures/index.html',
+        },
+      },
+      inline_svg: {
+        options: {
+          minify: false,
+          inlineImg: false,
+          inlineSvg: true,
+          inlineSvgBase64: false
+        },
+        files: {
+          'tmp/inline_svg': 'test/fixtures/index.html',
+        },
+      },
+      inline_svg_base64: {
+        options: {
+          minify: false,
+          inlineImg: false,
+          inlineSvg: true,
+          inlineSvgBase64: true
+        },
+        files: {
+          'tmp/inline_svg_base64': 'test/fixtures/index.html',
+        },
+      },
+      include_tag: {
+        options: {
+          minify: false,
+          inlineImg: false,
+          inlineSvg: false,
+          inlineSvgBase64: false,
+          includeTag: "?assets-inline"
+        },
+        files: {
+          'tmp/include_tag': 'test/fixtures/index.html',
+        },
+      },
+      all: {
+        options: {
+          jsDir: "",
+          cssDir: "",
+          assetsDir: "",
+          minify: true,
+          inlineImg: true,
+          inlineSvg: true,
+          inlineSvgBase64: true,
+          includeTag: "",
+          assetsUrlPrefix: "/lab/test/"
+        },
+        files: {
+          'tmp/all': 'test/fixtures/index.html',
+        },
+      }
     },
 
     // Unit tests.

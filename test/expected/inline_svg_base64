@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/ui-lightness/jquery-ui.css?assets-inline">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/ui-lightness/jquery-ui.css?assets-inline">
+    <style>@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.eot?v=4.0.3');
+}
+
+h1 {
+  color: red;
+}
+
+.backgroud-test-image {
+  width: 1000px;
+  height: 200px;
+  background: url("img/imouto-logo-large.png");
+}
+
+.backgroud-test-svg {
+  width: 1000px;
+  height: 200px;
+  background: url("svg/disable-wysiwyg.svg");
+}
+</style>
+    <style>/* Only this file should be smooshed if `includeTag` is defined. */
+body {
+  background: gray;
+}
+</style>
+  </head>
+  <body>
+    <h1>grunt-assets-inline</h1>
+
+    <p>Hello world! This is a test.</p>
+
+    <h2>This is a background image</h2>
+    <div class="backgroud-test-image"></div>
+
+    <h2>This is a SVG background</h2>
+    <div class="backgroud-test-svg"></div>
+
+    <h2>This is an image</h2>
+    <img src="img/imouto-logo-large.png">
+
+    <h2>This is a SVG image</h2>
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMzY2IDI4NSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjM2NiAyODUiPjx0aXRsZT5EaXNhYmxlIFdZU0lXWUc8L3RpdGxlPjxnIGZpbGw9IiNDQjM5MjAiPjxwYXRoIGQ9Ik0uNSAyNjIuNWgyODVWMjg1SC41ek0xMjggMTA1SC41djEyNy41SDEyOFYxMDV6bS0yMi41IDEwNUgyM3YtODIuNWg4Mi41VjIxMHptNTIuNSAwaDEyNy41djIyLjVIMTU4ek0uNSAwaDI4NXYyMi41SC41em0wIDUyLjVoMjg1Vjc1SC41ek0xNTggMTA1aDEyNy41djIyLjVIMTU4em0wIDUyLjVoMTI3LjVWMTgwSDE1OHpNNDA5IDI0Ny4xaDM4LjNjNTkuNiAwIDEwNi44LTMxLjEgMTA2LjgtOTUuNSAwLTYyLjktNDguMS05My41LTEwNi05My41SDQwOXYxODl6bTIzLjYtMTY3LjRoOC4zYzQ4LjEgMCA4OS43IDE3LjggODkuNyA3Mi45IDAgNTQuOS00MS42IDcyLjktODkuNyA3Mi45aC04LjNWNzkuN3ptMTQxLjMgMTY3LjRoMjIuNlYxMjkuOGgtMjIuNnYxMTcuM3ptMTEuMy0xODYuN2MtOC41IDAtMTUuNSA3LTE1LjUgMTUuOCAwIDguNSA3IDE1LjMgMTUuNSAxNS4zczE1LjUtNi44IDE1LjUtMTUuM2MuMS04LjgtNy0xNS44LTE1LjUtMTUuOHptMTAzLjEgODYuNGMtNi4zLTEyLjgtMTcuOC0yMC41LTMyLjEtMjAuNS0xOSAwLTM0LjYgMTUtMzQuNiAzNC4xIDAgMTYgOS41IDIyLjYgMjIuNiAyOS42bDIyLjEgMTEuOGM1LjMgMy41IDguMyA2LjUgOC4zIDEyLjggMCAxMC04LjMgMTYuNS0xNy44IDE2LjUtMTAuOCAwLTE2LjUtNi4zLTIxLjMtMTVsLTE5LjMgOC44YzYuMyAxNi41IDIzLjYgMjYuMyA0MC42IDI2LjMgMjEuOCAwIDQwLjMtMTYuNSA0MC4zLTM4LjggMC0xOC41LTEzLjMtMjcuMS0yNy4xLTMzLjMtMTMuOC02LjMtMjcuMy0xMC44LTI3LjMtMjEuMSAwLTYuNSA2LTExLjUgMTIuMy0xMS41IDYuNSAwIDEyLjMgNC41IDE1IDEwLjNsMTguMy0xMG03Ny45IDg0LjJjLTIzLjggMC0zNy4xLTIwLjYtMzcuMS00Mi42IDAtMjEuOCAxMy44LTQyLjEgMzcuMS00Mi4xIDI0LjMgMCAzOC4xIDE5LjMgMzguMSA0Mi4xLS4xIDIzLjEtMTMuNiA0Mi42LTM4LjEgNDIuNnptNTkuMy0xMDEuMkg4MDN2MTkuNWgtLjVjLTkuMy0xNC0yMy4zLTIzLjEtNDAuNi0yMy4xLTM0LjEgMC01NS40IDI5LjMtNTUuNCA2MS40IDAgMzMuNiAyMC4zIDYzLjQgNTYuMSA2My40IDE2LjggMCAzMC44LTkgMzkuOC0yMi4zaC41VjI0N2gyMi42VjEyOS44ek05MDguMiAyMzFjLTIzLjggMC0zNy4xLTIwLjYtMzcuMS00Mi42IDAtMjEuOCAxMy44LTQyLjEgMzcuMS00Mi4xIDI0LjMgMCAzOC4xIDE5LjMgMzguMSA0Mi4xIDAgMjMuMS0xMy41IDQyLjYtMzguMSA0Mi42em0tNTguNCAxNi4xaDIyLjZ2LTE4LjNoLjVjOSAxMy4zIDIzLjMgMjIuMyAzOS44IDIyLjMgMzYuMSAwIDU2LjEtMjkuOCA1Ni4xLTYzLjQgMC0zMi4xLTIxLjMtNjEuNC01NS4xLTYxLjQtMTcuNSAwLTMxLjYgOS00MC44IDIzLjFoLS41VjI5LjVoLTIyLjZ2MjE3LjZ6TTk4OC4yIDI5LjVoMjIuNlYyNDdoLTIyLjZWMjkuNXpNMTE0MiAxOTIuMnYtMy41YzAtMzQuOC0xNy41LTYyLjQtNTQuOS02Mi40LTM3LjggMC01Ny4xIDI3LjEtNTcuMSA2My4yIDAgMzQuNiAyMS44IDYxLjYgNTcuNiA2MS42IDIyLjggMCA0My40LTExLjggNTQuNC0zMi4xbC0xOS0xMC44Yy04LjUgMTQtMTcuOCAyMi44LTM1LjEgMjIuOC0yMS42IDAtMzUuMS0xOC44LTM1LjMtMzguOGg4OS40em05MDcuMi0xMzAuOUwxOTcyIDI1NC42IDE5MTguNiAxMTZsLTUzLjQgMTM4LjYtNzguNC0xOTYuNWgyNS42bDUyLjkgMTM1LjMgNTMuNC0xMzkuMyA1My40IDEzOS4zTDIwMjUgNTguMWg0OS41bDQ2LjQgODAuNyA0Ni40LTgwLjdoMjcuMWwtNjEuNiAxMDYuOHY4Mi4ySDIxMDl2LTgyLjJsLTU5LjgtMTAzLjZ6bS01NzEuNyAwbC03Ny4yIDE5My4zTDEzNDcgMTE2bC01My40IDEzOC42LTc4LjQtMTk2LjVoMjUuNmw1Mi45IDEzNS4zTDEzNDcgNTQuMWw1My40IDEzOS4zIDUyLjktMTM1LjNoNDkuNWw0Ni40IDgwLjcgNDYuNC04MC43aDI3LjFsLTYxLjYgMTA2Ljh2ODIuMmgtMjMuNnYtODIuMmwtNjAtMTAzLjZ6bS00MjMuNyAxMTMuOGMyLjgtMTYuOCAxNS44LTI5LjMgMzMuMy0yOS4zIDE4IDAgMjkuNiAxMS44IDMyLjMgMjkuM2gtNjUuNnptNjc1LjctOTIuNGMtMTAuMy0xOC4zLTI3LjYtMjguNi00OC42LTI4LjYtMjguNiAwLTU1LjYgMTguMy01NS42IDQ4LjkgMCAyNi4zIDE5LjUgMzguNiA0MS4xIDQ3LjlsMTMgNS41YzE2LjMgNi44IDMyLjYgMTUuNSAzMi42IDM1LjggMCAxOS44LTE0LjUgMzYuOC0zNC44IDM2LjgtMjAuMyAwLTM2LjgtMTUtMzYuNi0zNS44bC0yMy44IDVjNCAzMC4zIDI3LjggNTIuOSA1OC40IDUyLjkgMzMuOCAwIDYwLjQtMjQuNiA2MC40LTU4LjkgMC0zMS42LTIwLTQ2LjQtNDYuOS01Ni45bC0xMy41LTUuM2MtMTEuOC00LjUtMjYuMy0xMi4zLTI2LjMtMjcuMSAwLTE2LjUgMTYuNS0yNi44IDMxLjYtMjYuOCAxNC4zIDAgMjMuMyA2IDMwLjMgMTcuOGwxOC43LTExLjJ6bTI1LjUtMjQuNmgyMy42djE4OUgxNzU1di0xODl6bTUzNS43IDkzLjd2MjEuNmg0OC45Yy0xIDMwLjgtMzIuNiA1Ni4xLTYxLjkgNTYuMS00MC44IDAtNzMuNC0zNy42LTczLjQtNzcuMiAwLTQyLjQgMzMuMS03Ni43IDc1LjQtNzYuNyAyMy4xIDAgNDUuOSAxMi4zIDU5LjQgMzAuOGwxNi41LTE1LjhDMjMzNy4xIDY3LjMgMjMwOCA1NCAyMjc4LjcgNTRjLTU0LjQgMC05OCA0NC42LTk4IDk5IDAgNTIuNCA0Mi42IDk4IDk1LjUgOThzODkuNS0zOS44IDg5LjUtOTEuN3YtNy41aC03NXoiLz48L2c+PC9zdmc+">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
+    <script>alert('This should not be replaced.');</script>
+    <script>var appFunc = function(i) {
+  return i;
+  console.log("This is an uncompressed JS code")
+};
+
+alert('lol i am test script, really');
+</script>
+    <script>var inlineFunc = function(i) {
+  return i;
+  console.log("This is an uncompressed JS code")
+};
+
+console.log("Only this file should be smooshed if `includeTag` is defined.");
+</script>
+  </body>
+</html>

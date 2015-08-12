@@ -1,0 +1,4 @@
+/* Only this file should be smooshed if `includeTag` is defined. */
+body {
+  background: gray;
+}
