@@ -246,6 +246,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- See `CHANGELOG.md` for further release history
 - 2015-08-12   v0.1.7   Add `assetsDir`, `inlineSvg`, and `inlineSvgBase64` support
 - 2015-07-31   v0.1.6   Fix test and new default for `assetsUrlPrefix`
 - 2015-07-31   v0.1.5   Add `assetsUrlPrefix` support for fixing relative assets URLs in smooshed CSS
