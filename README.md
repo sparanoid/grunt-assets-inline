@@ -21,6 +21,7 @@ grunt.loadNpmTasks('grunt-html-smoosher');
 ## The "smoosher" task
 
 ### Overview
+
 In your project's Gruntfile, add a section named `smoosher` to the data object passed into `grunt.initConfig()`.
 
 ```js
@@ -45,6 +46,8 @@ grunt.initConfig({
 
 #### Script Minification
 
+Defaults to `false`.
+
 Minify scripts with UglifyJS.
 
 ```js
@@ -65,6 +68,8 @@ grunt.initConfig({
 
 #### Path config
 
+Defaults to `""`.
+
 When you have absolute paths for your external assets, it helps to add the local address of your asset files; relative to uncompiled HTML file.
 
 ```js
@@ -73,7 +78,8 @@ grunt.initConfig({
     all: {
       options: {
         jsDir: "../",
-        cssDir: "/Library/documents/sharedAssets/"
+        cssDir: "/project/styles/",
+        assetsDir: "/project/"
       },
       files: {
         'dest-index.html': 'source-index.html',
@@ -85,22 +91,26 @@ grunt.initConfig({
 
 **Example**
 
-If the local cwd for your uncompiled file is `/Library/documents/server/src/html` then the above settings would resolve:
+If the local cwd for your uncompiled file is `/project/html` then the above settings would resolve:
 
-`<script src="/assets/js/script.js" />` will use a local file at `/Library/documents/server/src/js/script.js`
+`<script src="/assets/js/script.js">` will use a local file at `/project/js/script.js`
 
-`<link href="/assets/css/styles.css" />` will use a local file at `/Library/documents/sharedAssets/assets/css/styles.css`
+`<link href="/assets/css/styles.css">` will use a local file at `/project/styles/assets/css/styles.css`
 
-#### Ignore images
+`<img src="/assets/svg/header.svg">` will use a local file at `/project/assets/svg/header.svg`
 
-If you want to smoosh `img` sources to Base64 in HTML, you can set `ignoreImg` to false
+#### Inline Images
+
+Defaults to `false`.
+
+If you want to smoosh `img` sources to Base64 in HTML, you can set `inlineImg` to true.
 
 ```js
 grunt.initConfig({
   smoosher: {
     all: {
       options: {
-        ignoreImg: false
+        inlineImg: true
       },
       files: {
         'dest-index.html': 'source-index.html',
@@ -110,9 +120,58 @@ grunt.initConfig({
 });
 ```
 
+#### Inline SVGs
+
+Defaults to `true`.
+
+If you want to smoosh SVGs in `img` tags in HTML, you can set `inlineSvg` to true.
+
+```js
+grunt.initConfig({
+  smoosher: {
+    all: {
+      options: {
+        inlineSvg: true
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
+`<img src="src/to/header.svg">` will turn into `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2175...`.
+
+#### Inline SVGs with Base64
+
+Defaults to `false`.
+
+```js
+grunt.initConfig({
+  smoosher: {
+    all: {
+      options: {
+        inlineSvg: true,
+        inlineSvgBase64: true
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
+SVG images are inlined directly into HTML by default. To have more compatibility with older browsers, you can also Base64 SVGs:
+
+`<img src="src/to/header.svg">` will turn into `<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0...`.
+
+Please note that Base64 generated files are always slightly bigger than the original files.
+
 #### Additional Assets URL Prefix
 
-If `ignoreImg` is set to false (by default) and you have assets in CSS (for example images, fonts, SVGs), smooshing CSS into HTML may break relative URLs, so you may have to replace the original URLs to absolute URLs.
+If you have assets in CSS or JS (for example images, fonts, SVGs), smooshing CSS or JS into HTMLs may break relative URLs, so you may have to replace the original URLs to absolute URLs.
 
 This option only searchs for URLs begin with `../`.
 
@@ -131,14 +190,41 @@ grunt.initConfig({
 });
 ```
 
+#### includeTag
+
+Defaults to `""`.
+
+```js
+grunt.initConfig({
+  smoosher: {
+    all: {
+      options: {
+        includeTag: "?assets-inline"
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
+By default all CSS and JS files are smooshed in HTML, If you only need specific files to be smooshed, you should define `includeTag`.
+
+For example the above configuration only smoosh filenames with `?assets-inline` queries:
+
+```html
+<link href="/assets/css/styles.css?assets-inline">
+```
+
 #### cssTags
 
 Defaults to
 
 ```js
 {
-  start: '<style>',
-  end: '</style>'
+  start: "<style>",
+  end: "</style>"
 }
 ```
 
@@ -148,17 +234,18 @@ Defaults to
 
 ```js
 {
-  start: '<script>',
-  end: '</script>'
+  start: "<script>",
+  end: "</script>"
 }
 ```
 
-
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 2015-08-12   v0.1.7   Add `assetsDir`, `inlineSvg`, and `inlineSvgBase64` support
 - 2015-07-31   v0.1.6   Fix test and new default for `assetsUrlPrefix`
 - 2015-07-31   v0.1.5   Add `assetsUrlPrefix` support for fixing relative assets URLs in smooshed CSS
 - 2015-07-28   v0.1.4   Add `ignoreImg` support
