@@ -62,10 +62,12 @@ module.exports = function(grunt) {
 
       grunt.log.writeln('Reading: ' + path.resolve(filePair.src.toString()));
 
-      $('link[rel="stylesheet"]' + options.includeTag).each(function () {
+      $('link[rel="stylesheet"]').each(function () {
         var style = $(this).attr('href');
         if(!style) { return; }
         if(style.match(/^\/\//)) { return; }
+        if(style.indexOf(options.includeTag) === -1) { return; }
+        style = style.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
         var attributes = getAttributes(this[0]);
@@ -84,11 +86,13 @@ module.exports = function(grunt) {
         $(this).replaceWith(options.cssTags.start + processInput(grunt.file.read(filePath)) + options.cssTags.end);
       });
 
-      $('script' + options.includeTag).each(function () {
+      $('script').each(function () {
         var script = $(this).attr('src');
         if(!script) { return; }
         if(script.match(/^\/\//)) { return; }
+        if(script.indexOf(options.includeTag) === -1) { return; }
         if(url.parse(script).protocol) { return; }
+        script = script.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
         var attributes = getAttributes(this[0]);
