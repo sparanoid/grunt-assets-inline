@@ -6,8 +6,32 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/ui-lightness/jquery-ui.css?assets-inline">
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/ui-lightness/jquery-ui.css?assets-inline">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/inline.css?assets-inline">
+    <style>@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.eot?v=4.0.3');
+}
+
+h1 {
+  color: red;
+}
+
+.backgroud-test-image {
+  width: 1000px;
+  height: 200px;
+  background: url("img/imouto-logo-large.png");
+}
+
+.backgroud-test-svg {
+  width: 1000px;
+  height: 200px;
+  background: url("svg/disable-wysiwyg.svg");
+}
+</style>
+    <style>/* Only this file should be smooshed if `includeTag` is defined. */
+body {
+  background: gray;
+}
+</style>
   </head>
   <body>
     <h1>grunt-assets-inline</h1>
@@ -29,7 +53,19 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
     <script>alert('This should not be replaced.');</script>
-    <script src="js/app.js"></script>
-    <script src="js/inline.js?assets-inline"></script>
+    <script>var appFunc = function(i) {
+  return i;
+  console.log("This is an uncompressed JS code")
+};
+
+alert('lol i am test script, really');
+</script>
+    <script>var inlineFunc = function(i) {
+  return i;
+  console.log("This is an uncompressed JS code")
+};
+
+console.log("Only this file should be smooshed if `includeTag` is defined.");
+</script>
   </body>
 </html>

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.0.3');
+}
+
+h1 {
+  color: red;
+}
+
+.backgroud-test-image {
+  width: 1000px;
+  height: 200px;
+  background: url("../img/imouto-logo-large.png");
+}
+
+.backgroud-test-svg {
+  width: 1000px;
+  height: 200px;
+  background: url("../svg/disable-wysiwyg.svg");
+}
