@@ -1,6 +1,0 @@
-.gitattributes
-.editorconfig
-.npmignore
-.travis.yml
-tmp
-*.tgz
