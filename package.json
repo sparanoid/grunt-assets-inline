@@ -8,10 +8,13 @@
     "email": "t@sparanoid.com"
   },
   "contributors": [
-    {
-      "name": "Ben Breedlove",
-      "email": "benbreedlove@gmail.com"
-    }
+    "Thanos Lefteris <alefteris@gmail.com>",
+    "Ben Breedlove <benbreedlove@gmail.com>",
+    "Patrick Gunderson <patrick@toolofna.com>",
+    "gunderson <pat@theorigin.net>",
+    "Gabriel Florit <gabrielflorit@gmail.com>",
+    "Dominik Schreiber <domischreib@gmail.com>",
+    "yvind Smestad <oyvind.smestad@wimpmusic.com>"
   ],
   "repository": {
     "type": "git",
