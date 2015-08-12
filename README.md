@@ -19,15 +19,15 @@ One the plugin has been installed, it may be enabled inside your Gruntfile with 
 grunt.loadNpmTasks('grunt-assets-inline');
 ```
 
-## The "inline" task
+## The "assets_inline" task
 
 ### Overview
 
-In your project's Gruntfile, add a section named `inline` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `assets_inline` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     options: {
       jsTags: { // optional
         start: '<script type="text/javascript">', // default: <script>
@@ -54,7 +54,7 @@ Minify scripts with UglifyJS.
 ```js
 
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         minify: true
@@ -75,7 +75,7 @@ When you have absolute paths for your external assets, it helps to add the local
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         jsDir: "../",
@@ -108,7 +108,7 @@ If you want to smoosh `img` sources to Base64 in HTML, you can set `inlineImg` t
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         inlineImg: true
@@ -129,7 +129,7 @@ If you want to smoosh SVGs in `img` tags in HTML, you can set `inlineSvg` to tru
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         inlineSvg: true
@@ -150,7 +150,7 @@ Defaults to `false`.
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         inlineSvg: true,
@@ -178,7 +178,7 @@ This option only searchs for URLs begin with `../`.
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         assetsUrlPrefix: '<%= config.base %>/assets/'
@@ -197,7 +197,7 @@ Defaults to `""`.
 
 ```js
 grunt.initConfig({
-  inline: {
+  assets_inline: {
     all: {
       options: {
         includeTag: "?assets-inline"

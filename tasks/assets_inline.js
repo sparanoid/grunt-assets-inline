@@ -23,7 +23,7 @@ module.exports = function(grunt) {
   var url = require('url');
   var uglify = require('uglify-js');
 
-  grunt.registerMultiTask('inline', 'Turn your distribution into something pastable.', function() {
+  grunt.registerMultiTask('assets_inline', 'Turn your distribution into something pastable.', function() {
 
     var options = this.options({
       jsDir: "",
