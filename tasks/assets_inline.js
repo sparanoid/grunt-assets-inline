@@ -58,8 +58,8 @@ module.exports = function(grunt) {
     var processSvg = function(i){return i;};
 
     processSvg = function(input){
-      // replace double quotes with single quotes for non-base64 SVG inlining.
-      return input.replace(/"/g, "'");
+      // replace double quotes with single quotes and remove line breaks for non-base64 SVG inlining.
+      return input.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, "");
     };
 
     this.files.forEach(function(filePair) {
