@@ -21,7 +21,7 @@ module.exports = function(grunt) {
   var cheerio = require('cheerio');
   var path = require('path');
   var url = require('url');
-  var uglify = require('uglify-js');
+  var uglifyjs = require('uglify-js');
 
   grunt.registerMultiTask('assets_inline', 'Turn your distribution into something pastable.', function() {
 
@@ -47,11 +47,11 @@ module.exports = function(grunt) {
       end: '</script>'
     };
 
-    var processInput = function(i){return i;};
+    var uglifyJS = function(i){return i;};
 
     if (options.minify){
-      processInput = function(input){
-        return uglify.minify(input, {fromString: true}).code;
+      uglifyJS = function(input){
+        return uglifyjs.minify(input, {fromString: true}).code;
       };
     }
 
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
         if(url.parse(style).protocol) { return; }
         var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src), style);
         grunt.log.writeln(('Including CSS: ').cyan + filePath);
-        $(this).replaceWith(options.cssTags.start + processInput(grunt.file.read(filePath)) + options.cssTags.end);
+        $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
       });
 
       $('script').each(function () {
@@ -112,7 +112,7 @@ module.exports = function(grunt) {
         grunt.log.writeln(('Including JS: ').cyan + filePath);
 
         //create and replace script with new scipt tag
-        $(this).replaceWith(options.jsTags.start + processInput(grunt.file.read(filePath)) + options.jsTags.end);
+        $(this).replaceWith(options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end);
       });
 
       if (options.inlineSvg) {
