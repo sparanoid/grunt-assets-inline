@@ -1,32 +1,33 @@
-# grunt-html-smoosher
-[![Build Status](https://api.travis-ci.org/sparanoid/grunt-html-smoosher.svg?branch=master)](https://travis-ci.org/sparanoid/grunt-html-smoosher)
+# grunt-assets-inline
+[![Build Status](https://api.travis-ci.org/sparanoid/grunt-assets-inline.svg?branch=master)](https://travis-ci.org/sparanoid/grunt-assets-inline)
 
-> A grunt task which takes a html file, finds all the css and js links, and outputs a version with all the css and js written inline for ease of pasting into a cms
+> A grunt task which takes a html file, finds all the css, js links and images, and outputs a version with all the css, js and images (Base64) written inline.
 
 ## Getting Started
+
 This plugin requires Grunt `~0.4.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-html-smoosher --save-dev
+npm install grunt-assets-inline --save-dev
 ```
 
 One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-html-smoosher');
+grunt.loadNpmTasks('grunt-assets-inline');
 ```
 
-## The "smoosher" task
+## The "inline" task
 
 ### Overview
 
-In your project's Gruntfile, add a section named `smoosher` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `inline` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     options: {
       jsTags: { // optional
         start: '<script type="text/javascript">', // default: <script>
@@ -53,7 +54,7 @@ Minify scripts with UglifyJS.
 ```js
 
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         minify: true
@@ -74,7 +75,7 @@ When you have absolute paths for your external assets, it helps to add the local
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         jsDir: "../",
@@ -107,7 +108,7 @@ If you want to smoosh `img` sources to Base64 in HTML, you can set `inlineImg` t
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         inlineImg: true
@@ -128,7 +129,7 @@ If you want to smoosh SVGs in `img` tags in HTML, you can set `inlineSvg` to tru
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         inlineSvg: true
@@ -149,7 +150,7 @@ Defaults to `false`.
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         inlineSvg: true,
@@ -177,7 +178,7 @@ This option only searchs for URLs begin with `../`.
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         assetsUrlPrefix: '<%= config.base %>/assets/'
@@ -196,7 +197,7 @@ Defaults to `""`.
 
 ```js
 grunt.initConfig({
-  smoosher: {
+  inline: {
     all: {
       options: {
         includeTag: "?assets-inline"

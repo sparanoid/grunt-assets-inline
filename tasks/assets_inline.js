@@ -1,4 +1,12 @@
 /*
+ * grunt-assets-inline
+ * https://github.com/sparanoid/assets-inline
+ *
+ * Copyright (c) 2015 Tunghsiao Liu
+ * Licensed under the MIT license.
+ */
+
+/*
  * grunt-html-smoosher
  * https://github.com/motherjones/grunt-html-smoosher
  *
@@ -15,7 +23,7 @@ module.exports = function(grunt) {
   var url = require('url');
   var uglify = require('uglify-js');
 
-  grunt.registerMultiTask('smoosher', 'Turn your distribution into something pastable.', function() {
+  grunt.registerMultiTask('inline', 'Turn your distribution into something pastable.', function() {
 
     var options = this.options({
       jsDir: "",
