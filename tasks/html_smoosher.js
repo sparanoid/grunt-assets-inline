@@ -20,8 +20,11 @@ module.exports = function(grunt) {
     var options = this.options({
       jsDir: "",
       cssDir: "",
+      assetsDir: "",
       minify: false,
-      ignoreImg: true,
+      inlineImg: false,
+      inlineSvg: true,
+      inlineSvgBase64: false,
       includeTag: "",
       assetsUrlPrefix: ""
     });
@@ -43,6 +46,13 @@ module.exports = function(grunt) {
         return uglify.minify(input, {fromString: true}).code;
       };
     }
+
+    var processSvg = function(i){return i;};
+
+    processSvg = function(input){
+      // replace double quotes with single quotes for non-base64 SVG inlining.
+      return input.replace(/"/g, "'");
+    };
 
     this.files.forEach(function(filePair) {
       // Check that the source file exists
@@ -93,13 +103,38 @@ module.exports = function(grunt) {
         $(this).replaceWith(options.jsTags.start + processInput(grunt.file.read(filePath)) + options.jsTags.end);
       });
 
-      if (!options.ignoreImg) {
+      if (options.inlineSvg) {
         $('img').each(function () {
           var src = $(this).attr('src');
           if (!src) { return; }
           if (src.match(/^\/\//)) { return; }
           if (url.parse(src).protocol) { return; }
-          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(path.join(path.dirname(filePair.src), src), { encoding: null })).toString('base64'));
+
+          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          grunt.log.writeln(('Including SVG: ').cyan + filePath);
+
+          if (src.match(/.svg$/i)) {
+            if (options.inlineSvgBase64) {
+              $(this).attr('src', 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            } else {
+              $(this).attr('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
+            }
+          }
+        });
+      }
+
+      if (options.inlineImg) {
+        $('img').each(function () {
+          var src = $(this).attr('src');
+          if (!src) { return; }
+          if (src.match(/^\/\//)) { return; }
+          if (src.match(/.svg$/i)) { return; }
+          if (url.parse(src).protocol) { return; }
+
+          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          grunt.log.writeln(('Including image: ').cyan + filePath);
+
+          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
         });
       }
 
