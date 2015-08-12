@@ -36,4 +36,58 @@ exports.assets_inline = {
 
     test.done();
   },
+  minify: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/minify');
+    var expected = grunt.file.read('test/expected/minify');
+    test.equal(actual, expected, 'tests minified css');
+
+    test.done();
+  },
+  inline_img: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/inline_img');
+    var expected = grunt.file.read('test/expected/inline_img');
+    test.equal(actual, expected, 'tests inline css images');
+
+    test.done();
+  },
+  inline_svg: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/inline_svg');
+    var expected = grunt.file.read('test/expected/inline_svg');
+    test.equal(actual, expected, 'tests inline images');
+
+    test.done();
+  },
+  inline_svg_base64: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/inline_svg_base64');
+    var expected = grunt.file.read('test/expected/inline_svg_base64');
+    test.equal(actual, expected, 'tests inline images');
+
+    test.done();
+  },
+  include_tag: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/include_tag');
+    var expected = grunt.file.read('test/expected/include_tag');
+    test.equal(actual, expected, 'tests inline images');
+
+    test.done();
+  },
+  all: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/all');
+    var expected = grunt.file.read('test/expected/all');
+    test.equal(actual, expected, 'tests inline images');
+
+    test.done();
+  }
 };
