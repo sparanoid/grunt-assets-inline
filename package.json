@@ -25,6 +25,9 @@
   },
   "license": "MIT",
   "main": "Gruntfile.js",
+  "files": [
+    "tasks"
+  ],
   "engines": {
     "node": ">= 0.8.0"
   },
