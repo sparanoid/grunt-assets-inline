@@ -1,3 +1,19 @@
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.7...v0.1.8) (2015-08-12)
+
+
+### Bug Fixes
+
+* **core:** remove line breaks in SVGs ([676235a](https://github.com/sparanoid/grunt-assets-inline/commit/676235a))
+* **core:** wrong `processInput` for CSS ([06cb9dd](https://github.com/sparanoid/grunt-assets-inline/commit/06cb9dd))
+* **grunt:** avoid es5 warning ([180e52a](https://github.com/sparanoid/grunt-assets-inline/commit/180e52a))
+
+### Features
+
+* **test:** add missing tests ([8d4fb88](https://github.com/sparanoid/grunt-assets-inline/commit/8d4fb88))
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.6...v0.1.7) (2015-08-12)
 
