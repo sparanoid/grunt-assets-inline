@@ -10,7 +10,9 @@
 
 module.exports = function(grunt) {
 
-  // Project configuration.
+  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+  require("time-grunt")(grunt);
+
   grunt.initConfig({
     jshint: {
       all: [
@@ -23,12 +25,10 @@ module.exports = function(grunt) {
       },
     },
 
-    // Before generating any new files, remove any previously-created files.
     clean: {
       tests: ['tmp'],
     },
 
-    // Configuration to be run (and then tested).
     assets_inline: {
       default_options: {
         files: {
@@ -42,19 +42,44 @@ module.exports = function(grunt) {
       tests: ['test/*_test.js'],
     },
 
+    conventionalChangelog: {
+      options: {
+        changelogOpts: {
+          preset: "angular"
+        }
+      },
+      dist: {
+        src: "CHANGELOG.md"
+      }
+    },
+
+    bump: {
+      options: {
+        files: ["package.json"],
+        commitMessage: 'chore: release v%VERSION%',
+        commitFiles: ["-a"],
+        tagMessage: 'chore: create tag %VERSION%',
+        push: false
+      }
+    }
+
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
   grunt.registerTask('test', ['clean', 'assets_inline', 'nodeunit']);
+
+  grunt.registerTask('release', 'bump, changelog and publish to npm.', function(type) {
+    grunt.task.run([
+      'bump:' + (type || 'patch') + ':bump-only',
+      'conventionalChangelog',
+      'bump-commit',
+      'npm-publish'
+    ]);
+  });
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
