@@ -61,6 +61,12 @@ module.exports = function(grunt) {
         tagMessage: 'chore: create tag %VERSION%',
         push: false
       }
+    },
+
+    'npm-contributors': {
+      options: {
+        commitMessage: 'chore: update contributors'
+      }
     }
 
   });
@@ -74,6 +80,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('release', 'bump, changelog and publish to npm.', function(type) {
     grunt.task.run([
+      'npm-contributors',
       'bump:' + (type || 'patch') + ':bump-only',
       'conventionalChangelog',
       'bump-commit',
