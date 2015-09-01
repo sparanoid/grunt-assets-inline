@@ -34,7 +34,8 @@ module.exports = function(grunt) {
       inlineSvg: true,
       inlineSvgBase64: false,
       includeTag: "",
-      assetsUrlPrefix: ""
+      assetsUrlPrefix: "",
+      verbose: false
     });
 
     options.cssTags = this.options().cssTags || {
@@ -161,7 +162,9 @@ module.exports = function(grunt) {
         var attributes = {};
         for (var index in el.attribs) {
             var attr = el.attribs[index];
-            grunt.log.writeln(("attr: ").green + index + ":" + attr);
+            if (options.verbose) {
+              grunt.log.writeln(("attr: ").green + index + ":" + attr);
+            }
             attributes[ index ] = attr;
         }
         return attributes;
