@@ -1,7 +1,7 @@
 {
   "name": "grunt-assets-inline",
   "description": "A grunt task which takes a html file, finds all the css, js links and images, and outputs a version with all the css, js and images (Base64) written inline.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/sparanoid/grunt-assets-inline",
   "author": {
     "name": "Tunghsiao Liu",
