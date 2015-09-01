@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
       var $ = cheerio.load(grunt.file.read(filePair.src));
 
-      grunt.log.writeln('Reading: ' + path.resolve(filePair.src.toString()));
+      grunt.log.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
 
       $('link[rel="stylesheet"]').each(function () {
         var style = $(this).attr('href');
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
 
         if(url.parse(style).protocol) { return; }
         var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src), style);
-        grunt.log.writeln(('Including CSS: ').cyan + filePath);
+        grunt.log.writeln(('    css: ').cyan + filePath);
         $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
       });
 
@@ -110,7 +110,7 @@ module.exports = function(grunt) {
         }
 
         var filePath = (script.substr(0,1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src), script);
-        grunt.log.writeln(('Including JS: ').cyan + filePath);
+        grunt.log.writeln(('     js: ').cyan + filePath);
 
         //create and replace script with new scipt tag
         $(this).replaceWith(options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end);
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
           if (url.parse(src).protocol) { return; }
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
-          grunt.log.writeln(('Including SVG: ').cyan + filePath);
+          grunt.log.writeln(('    svg: ').cyan + filePath);
 
           if (src.match(/.svg$/i)) {
             if (options.inlineSvgBase64) {
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
           if (url.parse(src).protocol) { return; }
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
-          grunt.log.writeln(('Including image: ').cyan + filePath);
+          grunt.log.writeln(('  image: ').cyan + filePath);
 
           $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
         });
@@ -155,7 +155,7 @@ module.exports = function(grunt) {
       // replace relative path
       html = html.replace(/[.]{2}\//g, options.assetsUrlPrefix);
       grunt.file.write(path.resolve(filePair.dest), html);
-      grunt.log.writeln(('Created ').green + path.resolve(filePair.dest));
+      grunt.log.writeln(('Created: ').green + path.resolve(filePair.dest) + '\n');
     });
 
     function getAttributes(el) {
@@ -163,7 +163,7 @@ module.exports = function(grunt) {
         for (var index in el.attribs) {
             var attr = el.attribs[index];
             if (options.verbose) {
-              grunt.log.writeln(("attr: ").green + index + ":" + attr);
+              grunt.log.writeln(("   attr: ").blue + index + ":" + attr);
             }
             attributes[ index ] = attr;
         }
