@@ -242,6 +242,17 @@ Defaults to
 }
 ```
 
+#### deleteOriginals
+
+Defaults to
+
+```js
+{
+  deleteOriginals: false
+}
+
+You can delete smooshed files after the main task. Please note that once a file is smooshed into the HTML, it will marked as pending delete, no matter if it is included elsewhere without smooshing.
+
 #### verbose
 
 Defaults to
