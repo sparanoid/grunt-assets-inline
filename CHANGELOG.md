@@ -1,3 +1,15 @@
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.8...v0.1.9) (2015-09-01)
+
+
+### Features
+
+* **core:** add `deleteOriginals` option ([d2beef7](https://github.com/sparanoid/grunt-assets-inline/commit/d2beef7))
+* **core:** add verbose log option ([ff8c550](https://github.com/sparanoid/grunt-assets-inline/commit/ff8c550))
+* **core:** better verbose output ([28b68c1](https://github.com/sparanoid/grunt-assets-inline/commit/28b68c1))
+
+
+
 <a name="0.1.8"></a>
 ## [0.1.8](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.7...v0.1.8) (2015-08-12)
 
