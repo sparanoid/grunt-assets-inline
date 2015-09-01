@@ -35,7 +35,9 @@ module.exports = function(grunt) {
       inlineSvgBase64: false,
       includeTag: "",
       assetsUrlPrefix: "",
-      verbose: false
+      verbose: false,
+      deleteOriginals: false
+
     });
 
     options.cssTags = this.options().cssTags || {
@@ -62,6 +64,8 @@ module.exports = function(grunt) {
       // replace double quotes with single quotes and remove line breaks for non-base64 SVG inlining.
       return input.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, "");
     };
+
+    var filesToDelete = [];
 
     this.files.forEach(function(filePair) {
       // Check that the source file exists
@@ -93,6 +97,10 @@ module.exports = function(grunt) {
         var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src), style);
         grunt.log.writeln(('    css: ').cyan + filePath);
         $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
+
+        if (options.deleteOriginals) {
+          filesToDelete.push(filePath);
+        }
       });
 
       $('script').each(function () {
@@ -114,6 +122,10 @@ module.exports = function(grunt) {
 
         //create and replace script with new scipt tag
         $(this).replaceWith(options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end);
+
+        if (options.deleteOriginals) {
+          filesToDelete.push(filePath);
+        }
       });
 
       if (options.inlineSvg) {
@@ -133,6 +145,10 @@ module.exports = function(grunt) {
               $(this).attr('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
             }
           }
+
+          if (options.deleteOriginals) {
+            filesToDelete.push(filePath);
+          }
         });
       }
 
@@ -148,6 +164,10 @@ module.exports = function(grunt) {
           grunt.log.writeln(('  image: ').cyan + filePath);
 
           $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+
+          if (options.deleteOriginals) {
+            filesToDelete.push(filePath);
+          }
         });
       }
 
@@ -158,16 +178,26 @@ module.exports = function(grunt) {
       grunt.log.writeln(('Created: ').green + path.resolve(filePair.dest) + '\n');
     });
 
-    function getAttributes(el) {
-        var attributes = {};
-        for (var index in el.attribs) {
-            var attr = el.attribs[index];
-            if (options.verbose) {
-              grunt.log.writeln(("   attr: ").blue + index + ":" + attr);
-            }
-            attributes[ index ] = attr;
+    // Delete the original files
+    if (options.deleteOriginals) {
+      filesToDelete.forEach(function(filename) {
+        if (grunt.file.exists(filename)) {
+          grunt.file.delete(filename);
+          grunt.log.writeln(('Removed: ').green + filename);
         }
-        return attributes;
+      });
+    }
+
+    function getAttributes(el) {
+      var attributes = {};
+      for (var index in el.attribs) {
+        var attr = el.attribs[index];
+        if (options.verbose) {
+          grunt.log.writeln(('   attr: ').blue + index + ":" + attr);
+        }
+        attributes[ index ] = attr;
+      }
+      return attributes;
     }
   });
 };
