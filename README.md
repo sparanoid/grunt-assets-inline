@@ -1,5 +1,7 @@
 # grunt-assets-inline
 [![Build Status](https://api.travis-ci.org/sparanoid/grunt-assets-inline.svg?branch=master)](https://travis-ci.org/sparanoid/grunt-assets-inline)
+[![npm Version](https://img.shields.io/npm/v/grunt-assets-inline.svg)](https://www.npmjs.com/package/grunt-assets-inline)
+[![npm Downloads](https://img.shields.io/npm/dm/grunt-assets-inline.svg)](https://www.npmjs.com/package/grunt-assets-inline)
 
 > A grunt task which takes a html file, finds all the css, js links and images, and outputs a version with all the css, js and images (Base64) written inline.
 
