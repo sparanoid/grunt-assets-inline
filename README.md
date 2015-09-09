@@ -1,5 +1,7 @@
 # grunt-assets-inline
 [![Build Status](https://api.travis-ci.org/sparanoid/grunt-assets-inline.svg?branch=master)](https://travis-ci.org/sparanoid/grunt-assets-inline)
+[![Dependency Status](https://david-dm.org/sparanoid/grunt-assets-inline.svg)](https://david-dm.org/sparanoid/grunt-assets-inline)
+[![devDependency Status](https://david-dm.org/sparanoid/grunt-assets-inline/dev-status.svg)](https://david-dm.org/sparanoid/grunt-assets-inline#info=devDependencies)
 [![npm Version](https://img.shields.io/npm/v/grunt-assets-inline.svg)](https://www.npmjs.com/package/grunt-assets-inline)
 [![npm Downloads](https://img.shields.io/npm/dm/grunt-assets-inline.svg)](https://www.npmjs.com/package/grunt-assets-inline)
 
