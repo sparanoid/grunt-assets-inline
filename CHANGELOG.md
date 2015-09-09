@@ -8,7 +8,7 @@
 
 ### Features
 
-* smoosh SVG in inlined `<style>` [hidden tracks] ([b899425](https://github.com/sparanoid/grunt-assets-inline/commit/b899425))
+* **core:** smoosh SVG in inlined `<style>` [hidden tracks] ([b899425](https://github.com/sparanoid/grunt-assets-inline/commit/b899425))
 * **docs:** update badges ([46e15ee](https://github.com/sparanoid/grunt-assets-inline/commit/46e15ee))
 
 
