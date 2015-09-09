@@ -106,6 +106,10 @@ module.exports = function(grunt) {
           } else {
             style = style.replace(src, 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
           }
+
+          if (options.deleteOriginals) {
+            filesToDelete.push(filePath);
+          }
         });
 
         $(this).text(style);
