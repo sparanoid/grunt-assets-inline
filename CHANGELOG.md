@@ -1,3 +1,13 @@
+<a name="0.1.11"></a>
+## [0.1.11](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.10...v0.1.11) (2015-09-09)
+
+
+### Bug Fixes
+
+* **core:** inlined assets not deleted ([10cfe91](https://github.com/sparanoid/grunt-assets-inline/commit/10cfe91))
+
+
+
 <a name="0.1.10"></a>
 ## [0.1.10](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.9...v0.1.10) (2015-09-09)
 
