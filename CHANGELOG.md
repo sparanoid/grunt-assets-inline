@@ -1,3 +1,18 @@
+<a name="0.1.10"></a>
+## [0.1.10](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.9...v0.1.10) (2015-09-09)
+
+
+### Bug Fixes
+
+* **docs:** wrong format ([2728fa0](https://github.com/sparanoid/grunt-assets-inline/commit/2728fa0))
+
+### Features
+
+* smoosh SVG in inlined `<style>` [hidden tracks] ([b899425](https://github.com/sparanoid/grunt-assets-inline/commit/b899425))
+* **docs:** update badges ([46e15ee](https://github.com/sparanoid/grunt-assets-inline/commit/46e15ee))
+
+
+
 <a name="0.1.9"></a>
 ## [0.1.9](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.8...v0.1.9) (2015-09-01)
 
