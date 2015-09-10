@@ -3,4 +3,4 @@ var appFunc = function(i) {
   console.log("This is an uncompressed JS code")
 };
 
-alert('lol i am test script, really');
+console.log('lol i am test script, really');
