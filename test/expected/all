@@ -89,8 +89,8 @@ body {
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
-    <script>alert('This should not be replaced.');</script>
-    <script>var appFunc=function(r){return r};alert("lol i am test script, really");</script>
+    <script>console.log('This should not be replaced.');</script>
+    <script>var appFunc=function(l){return l};console.log("lol i am test script, really");</script>
     <script>var inlineFunc=function(n){return n};console.log("Only this file should be smooshed if `includeTag` is defined.");</script>
   </body>
 </html>

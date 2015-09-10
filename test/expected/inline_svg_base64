@@ -89,13 +89,13 @@ body {
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?assets-inline"></script>
-    <script>alert('This should not be replaced.');</script>
+    <script>console.log('This should not be replaced.');</script>
     <script>var appFunc = function(i) {
   return i;
   console.log("This is an uncompressed JS code")
 };
 
-alert('lol i am test script, really');
+console.log('lol i am test script, really');
 </script>
     <script>var inlineFunc = function(i) {
   return i;
