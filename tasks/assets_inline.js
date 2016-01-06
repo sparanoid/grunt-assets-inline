@@ -193,6 +193,8 @@ module.exports = function(grunt) {
           if (!src) { return; }
           if (src.match(/^\/\//)) { return; }
           if (src.match(/.svg$/i)) { return; }
+          if (src.indexOf(options.includeTag) === -1) { return; }
+          src = src.replace(/\?.+$/, '');
           if (url.parse(src).protocol) { return; }
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
