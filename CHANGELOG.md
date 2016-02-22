@@ -1,3 +1,13 @@
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.11...v0.1.12) (2016-02-22)
+
+
+### Features
+
+* **test:** update content ([fb949b3](https://github.com/sparanoid/grunt-assets-inline/commit/fb949b3))
+
+
+
 <a name="0.1.11"></a>
 ## [0.1.11](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.10...v0.1.11) (2015-09-09)
 
