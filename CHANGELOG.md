@@ -1,3 +1,13 @@
+<a name="0.1.13"></a>
+## [0.1.13](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.12...v0.1.13) (2016-02-22)
+
+
+### Features
+
+* bump outdated packages ([4009037](https://github.com/sparanoid/grunt-assets-inline/commit/4009037))
+
+
+
 <a name="0.1.12"></a>
 ## [0.1.12](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.11...v0.1.12) (2016-02-22)
 
