@@ -1,3 +1,13 @@
+<a name="0.1.14"></a>
+## [0.1.14](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.13...v0.1.14) (2016-04-06)
+
+
+### Bug Fixes
+
+* **travis:** avoid deps hard errors ([e32e315](https://github.com/sparanoid/grunt-assets-inline/commit/e32e315))
+
+
+
 <a name="0.1.13"></a>
 ## [0.1.13](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.12...v0.1.13) (2016-02-22)
 
