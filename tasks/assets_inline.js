@@ -134,7 +134,7 @@ module.exports = function(grunt) {
         }
 
         if(url.parse(style).protocol) { return; }
-        var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src), style);
+        var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
         grunt.log.writeln(('    css: ').cyan + filePath);
         $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
 
@@ -157,7 +157,7 @@ module.exports = function(grunt) {
           delete attributes.src;
         }
 
-        var filePath = (script.substr(0,1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src), script);
+        var filePath = (script.substr(0,1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src.toString()), script);
         grunt.log.writeln(('     js: ').cyan + filePath);
 
         //create and replace script with new scipt tag
