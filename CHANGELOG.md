@@ -1,3 +1,13 @@
+<a name="0.1.19"></a>
+## [0.1.19](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.18...v0.1.19) (2017-01-20)
+
+
+### Bug Fixes
+
+* **travis:** remove old node support ([482e98a](https://github.com/sparanoid/grunt-assets-inline/commit/482e98a))
+
+
+
 <a name="0.1.18"></a>
 ## [0.1.18](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.17...v0.1.18) (2017-01-20)
 
