@@ -100,7 +100,7 @@ module.exports = function(grunt) {
           if (!src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
 
-          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
           grunt.log.writeln((' inline: ').cyan + filePath);
 
           if (options.inlineSvgBase64) {
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
           if(url.parse(src).protocol) { return; }
           src = src.replace(/\?.+$/, '');
 
-          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
           if (src.match(/.svg$/i)) {
             if (options.inlineSvgBase64) {
@@ -217,7 +217,7 @@ module.exports = function(grunt) {
           if (!src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
 
-          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
           grunt.log.writeln(('    svg: ').cyan + filePath);
 
           if (options.inlineSvgBase64) {
@@ -240,7 +240,7 @@ module.exports = function(grunt) {
           if (src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
 
-          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
           grunt.log.writeln(('  image: ').cyan + filePath);
 
           $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
