@@ -1,3 +1,13 @@
+<a name="0.1.18"></a>
+## [0.1.18](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.17...v0.1.18) (2017-01-20)
+
+
+### Features
+
+* add `assetsKeep` and `assetsDelete` support ([09ce376](https://github.com/sparanoid/grunt-assets-inline/commit/09ce376))
+
+
+
 <a name="0.1.17"></a>
 ## [0.1.17](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.16...v0.1.17) (2017-01-20)
 
