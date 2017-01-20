@@ -14,9 +14,10 @@
     "gunderson <pat@theorigin.net>",
     "Gabriel Florit <gabrielflorit@gmail.com>",
     "greenkeeperio-bot <support@greenkeeper.io>",
-    "gruntjs-updater <updater@gruntjs.com>",
+    "yvind Smestad <oyvind.smestad@wimpmusic.com>",
     "Dominik Schreiber <domischreib@gmail.com>",
-    "yvind Smestad <oyvind.smestad@wimpmusic.com>"
+    "gruntjs-updater <updater@gruntjs.com>",
+    "Greenkeeper <support@greenkeeper.io>"
   ],
   "repository": {
     "type": "git",
