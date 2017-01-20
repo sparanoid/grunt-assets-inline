@@ -2,7 +2,7 @@
  * grunt-assets-inline
  * https://github.com/sparanoid/assets-inline
  *
- * Copyright (c) 2015 Sparanoid
+ * Copyright (c) 2017 Sparanoid
  * Licensed under the MIT license.
  */
 
