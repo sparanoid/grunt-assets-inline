@@ -23,7 +23,7 @@ module.exports = function(grunt) {
   var url = require('url');
   var uglifyjs = require('uglify-js');
 
-  grunt.registerMultiTask('assets_inline', 'Turn your distribution into something pastable.', function() {
+  grunt.registerMultiTask('assets_inline', 'Inline external resources into HTML', function() {
 
     var options = this.options({
       jsDir: "",
@@ -37,7 +37,9 @@ module.exports = function(grunt) {
       includeTag: "",
       assetsUrlPrefix: "",
       verbose: false,
-      deleteOriginals: false
+      deleteOriginals: false,
+      assetsKeep: "assets-keep",
+      assetsDelete: "assets-delete"
 
     });
 
@@ -51,22 +53,50 @@ module.exports = function(grunt) {
       end: '</script>'
     };
 
-    var uglifyJS = function(i){return i;};
+    var uglifyJS = function (i) { return i; };
 
-    if (options.minify){
-      uglifyJS = function(input){
+    if (options.minify) {
+      uglifyJS = function (input) {
         return uglifyjs.minify(input, {fromString: true}).code;
       };
     }
 
-    var processSvg = function(i){return i;};
+    var processSvg = function (i) { return i; };
 
     processSvg = function(input){
       // replace double quotes with single quotes and remove line breaks for non-base64 SVG inlining.
       return input.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, "");
     };
 
+    var getAttributes = function (el) {
+      var attributes = {};
+      for (var index in el.attr) {
+        var attr = el.attr[index];
+        if (options.verbose) {
+          grunt.log.writeln(('   attr: ').blue + index + ":" + attr);
+        }
+        attributes[ index ] = attr;
+      }
+      return attributes;
+    };
+
     var filesToDelete = [];
+
+    var checkDelete = function (src) {
+      if (src.includes(options.assetsDelete)) {
+        return true;
+      }
+
+      if (options.deleteOriginals) {
+        if (src.includes(options.assetsKeep)) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    };
 
     this.files.forEach(function(filePair) {
       // Check that the source file exists
@@ -79,7 +109,7 @@ module.exports = function(grunt) {
 
       grunt.log.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
 
-      // Assets inside inline `<style>`
+      // Assets inside inline `<style>` => inline assets
       $('style[data-assets-inline]').each(function () {
         var style = $(this).html();
         if(!style) { return; }
@@ -99,9 +129,9 @@ module.exports = function(grunt) {
           if (src.match(/^\/\//)) { return; }
           if (!src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
+          var deleteOriginal = checkDelete(src);
 
           var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
-          grunt.log.writeln((' inline: ').cyan + filePath);
 
           if (options.inlineSvgBase64) {
             style = style.replace(src, 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
@@ -109,20 +139,24 @@ module.exports = function(grunt) {
             style = style.replace(src, 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
           }
 
-          if (options.deleteOriginals) {
+          if (deleteOriginal) {
+            grunt.log.writeln((' delete: ').gray + filePath);
             filesToDelete.push(filePath);
+          } else {
+            grunt.log.writeln(('   keep: ').blue + filePath);
           }
         });
 
         $(this).text(style);
       });
 
-      // Assets inside external stylesheets
+      // External stylesheets => inline stylesheets
       $('link[rel="stylesheet"]').each(function () {
         var style = $(this).attr('href');
         if(!style) { return; }
         if(style.match(/^\/\//)) { return; }
         if(style.indexOf(options.includeTag) === -1) { return; }
+        var deleteOriginal = checkDelete(style);
         style = style.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
@@ -138,21 +172,24 @@ module.exports = function(grunt) {
 
         if(url.parse(style).protocol) { return; }
         var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
-        grunt.log.writeln(('    css: ').cyan + filePath);
         $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
 
-        if (options.deleteOriginals) {
+        if (deleteOriginal) {
+          grunt.log.writeln((' delete: ').gray + filePath);
           filesToDelete.push(filePath);
+        } else {
+          grunt.log.writeln(('   keep: ').blue + filePath);
         }
       });
 
-      // Assets inside `<script>`
+      // Scripts inside `<script>` = inlne scripts
       $('script').each(function () {
         var script = $(this).attr('src');
         if(!script) { return; }
         if(script.match(/^\/\//)) { return; }
         if(script.indexOf(options.includeTag) === -1) { return; }
         if(url.parse(script).protocol) { return; }
+        var deleteOriginal = checkDelete(script);
         script = script.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
@@ -162,13 +199,15 @@ module.exports = function(grunt) {
         }
 
         var filePath = (script.substr(0,1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src.toString()), script);
-        grunt.log.writeln(('     js: ').cyan + filePath);
 
         //create and replace script with new scipt tag
         $(this).replaceWith(options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end);
 
-        if (options.deleteOriginals) {
+        if (deleteOriginal) {
+          grunt.log.writeln((' delete: ').gray + filePath);
           filesToDelete.push(filePath);
+        } else {
+          grunt.log.writeln(('   keep: ').blue + filePath);
         }
       });
 
@@ -180,6 +219,7 @@ module.exports = function(grunt) {
           if(src.match(/^\/\//)) { return; }
           if(src.indexOf(options.includeTag) === -1) { return; }
           if(url.parse(src).protocol) { return; }
+          var deleteOriginal = checkDelete(src);
           src = src.replace(/\?.+$/, '');
 
           var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
@@ -190,21 +230,21 @@ module.exports = function(grunt) {
             } else {
               $(this).attr('href', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
             }
-            grunt.log.writeln(('    svg: ').cyan + filePath);
           }
 
           if (src.match(/.ico$/i)) {
             $(this).attr('href', 'data:image/x-icon;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
-            grunt.log.writeln(('    ico: ').cyan + filePath);
           }
 
           if (src.match(/.(?:png|jpg)$/i)) {
             $(this).attr('href', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
-            grunt.log.writeln(('  image: ').cyan + filePath);
           }
 
-          if (options.deleteOriginals) {
+          if (deleteOriginal) {
+            grunt.log.writeln((' delete: ').gray + filePath);
             filesToDelete.push(filePath);
+          } else {
+            grunt.log.writeln(('   keep: ').blue + filePath);
           }
         });
       }
@@ -216,9 +256,9 @@ module.exports = function(grunt) {
           if (src.match(/^\/\//)) { return; }
           if (!src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
+          var deleteOriginal = checkDelete(src);
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
-          grunt.log.writeln(('    svg: ').cyan + filePath);
 
           if (options.inlineSvgBase64) {
             $(this).attr('src', 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
@@ -226,8 +266,11 @@ module.exports = function(grunt) {
             $(this).attr('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
           }
 
-          if (options.deleteOriginals) {
+          if (deleteOriginal) {
+            grunt.log.writeln((' delete: ').gray + filePath);
             filesToDelete.push(filePath);
+          } else {
+            grunt.log.writeln(('   keep: ').blue + filePath);
           }
         });
       }
@@ -239,14 +282,17 @@ module.exports = function(grunt) {
           if (src.match(/^\/\//)) { return; }
           if (src.match(/.svg$/i)) { return; }
           if (url.parse(src).protocol) { return; }
+          var deleteOriginal = checkDelete(src);
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
-          grunt.log.writeln(('  image: ').cyan + filePath);
 
           $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
 
-          if (options.deleteOriginals) {
+          if (deleteOriginal) {
+            grunt.log.writeln((' delete: ').gray + filePath);
             filesToDelete.push(filePath);
+          } else {
+            grunt.log.writeln(('   keep: ').blue + filePath);
           }
         });
       }
@@ -259,25 +305,11 @@ module.exports = function(grunt) {
     });
 
     // Delete the original files
-    if (options.deleteOriginals) {
-      filesToDelete.forEach(function(filename) {
-        if (grunt.file.exists(filename)) {
-          grunt.file.delete(filename);
-          grunt.log.writeln(('Removed: ').green + filename);
-        }
-      });
-    }
-
-    function getAttributes(el) {
-      var attributes = {};
-      for (var index in el.attr) {
-        var attr = el.attr[index];
-        if (options.verbose) {
-          grunt.log.writeln(('   attr: ').blue + index + ":" + attr);
-        }
-        attributes[ index ] = attr;
+    filesToDelete.forEach(function(filename) {
+      if (grunt.file.exists(filename)) {
+        grunt.file.delete(filename);
+        grunt.log.writeln(('Removed: ').green + filename);
       }
-      return attributes;
-    }
+    });
   });
 };
