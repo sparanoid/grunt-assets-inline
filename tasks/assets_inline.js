@@ -33,6 +33,7 @@ module.exports = function(grunt) {
       inlineImg: false,
       inlineSvg: true,
       inlineSvgBase64: false,
+      inlineLinkTags: false,
       includeTag: "",
       assetsUrlPrefix: "",
       verbose: false,
@@ -78,6 +79,7 @@ module.exports = function(grunt) {
 
       grunt.log.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
 
+      // Assets inside inline `<style>`
       $('style[data-assets-inline]').each(function () {
         var style = $(this).html();
         if(!style) { return; }
@@ -115,6 +117,7 @@ module.exports = function(grunt) {
         $(this).text(style);
       });
 
+      // Assets inside external stylesheets
       $('link[rel="stylesheet"]').each(function () {
         var style = $(this).attr('href');
         if(!style) { return; }
@@ -143,6 +146,7 @@ module.exports = function(grunt) {
         }
       });
 
+      // Assets inside `<script>`
       $('script').each(function () {
         var script = $(this).attr('src');
         if(!script) { return; }
@@ -167,6 +171,43 @@ module.exports = function(grunt) {
           filesToDelete.push(filePath);
         }
       });
+
+      // Assets inside `<link>`, most for favicons
+      if (options.inlineLinkTags) {
+        $('link').each(function () {
+          var src = $(this).attr('href');
+          if(!src) { return; }
+          if(src.match(/^\/\//)) { return; }
+          if(src.indexOf(options.includeTag) === -1) { return; }
+          if(url.parse(src).protocol) { return; }
+          src = src.replace(/\?.+$/, '');
+
+          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src), src);
+
+          if (src.match(/.svg$/i)) {
+            if (options.inlineSvgBase64) {
+              $(this).attr('href', 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            } else {
+              $(this).attr('href', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
+            }
+            grunt.log.writeln(('    svg: ').cyan + filePath);
+          }
+
+          if (src.match(/.ico$/i)) {
+            $(this).attr('href', 'data:image/x-icon;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            grunt.log.writeln(('    ico: ').cyan + filePath);
+          }
+
+          if (src.match(/.(?:png|jpg)$/i)) {
+            $(this).attr('href', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            grunt.log.writeln(('  image: ').cyan + filePath);
+          }
+
+          if (options.deleteOriginals) {
+            filesToDelete.push(filePath);
+          }
+        });
+      }
 
       if (options.inlineSvg) {
         $('img').each(function () {
