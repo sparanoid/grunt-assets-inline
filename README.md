@@ -176,6 +176,27 @@ SVG images are inlined directly into HTML by default. To have more compatibility
 
 Please note that Base64 generated files are always slightly bigger than the original files.
 
+#### Inline `link` Tags
+
+Defaults to `false`.
+
+If you want to smoosh images inside your `link` tags, for example favicons, you can set `inlineLinkTags` to true.
+
+```js
+grunt.initConfig({
+  assets_inline: {
+    all: {
+      options: {
+        inlineLinkTags: true
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
 #### Additional Assets URL Prefix
 
 If you have assets in CSS or JS (for example images, fonts, SVGs), smooshing CSS or JS into HTMLs may break relative URLs, so you may have to replace the original URLs to absolute URLs.
