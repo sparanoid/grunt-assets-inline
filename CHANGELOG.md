@@ -1,3 +1,13 @@
+<a name="0.1.15"></a>
+## [0.1.15](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.14...v0.1.15) (2017-01-20)
+
+
+### Features
+
+* add `inlineLinkTags` support ([1007e73](https://github.com/sparanoid/grunt-assets-inline/commit/1007e73))
+
+
+
 <a name="0.1.14"></a>
 ## [0.1.14](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.13...v0.1.14) (2016-04-06)
 
