@@ -281,6 +281,8 @@ module.exports = function(grunt) {
           if (!src) { return; }
           if (src.match(/^\/\//)) { return; }
           if (src.match(/.svg$/i)) { return; }
+          if (src.indexOf(options.includeTag) === -1) { return; }
+          src = src.replace(/\?.+$/, '');
           if (url.parse(src).protocol) { return; }
           var deleteOriginal = checkDelete(src);
 
