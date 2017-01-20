@@ -1,3 +1,13 @@
+<a name="0.1.17"></a>
+## [0.1.17](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.16...v0.1.17) (2017-01-20)
+
+
+### Bug Fixes
+
+* wrong relative path, ref: https://github.com/sparanoid/grunt-assets-inline/pull/ ([768aff1](https://github.com/sparanoid/grunt-assets-inline/commit/768aff1))
+
+
+
 <a name="0.1.16"></a>
 ## [0.1.16](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.14...v0.1.16) (2017-01-20)
 
