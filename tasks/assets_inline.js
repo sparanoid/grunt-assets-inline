@@ -293,7 +293,17 @@ module.exports = function(grunt) {
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
-          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+          if(filePath.indexOf('?skip-inline') > 0) {
+            return;
+          }
+          var fileContent = grunt.file.read(filePath, { encoding: null });
+          var fileSize = fileContent.length / 1024;
+          if(options.inlineImgFileLimit && fileSize > options.inlineImgFileLimit) {
+              grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
+              return;
+          }
+          
+          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(fileContent).toString('base64'));
 
           if (deleteOriginal) {
             grunt.log.writeln((' delete: ').gray + filePath);
