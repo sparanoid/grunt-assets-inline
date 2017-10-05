@@ -259,11 +259,18 @@ module.exports = function(grunt) {
           var deleteOriginal = checkDelete(src);
 
           var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+          
+          var fileContent = options.inlineSvgBase64 ? grunt.file.read(filePath, { encoding: null }) : grunt.file.read(filePath);
+          var fileSize = fileContent.length / 1024;
+          if(options.inlineSvgFileLimit && fileSize > options.inlineSvgFileLimit) {
+              grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
+              return;
+          }
 
           if (options.inlineSvgBase64) {
-            $(this).attr('src', 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            $(this).attr('src', 'data:image/svg+xml;base64,' + new Buffer(fileContent).toString('base64'));
           } else {
-            $(this).attr('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
+            $(this).attr('src', 'data:image/svg+xml;utf8,' + processSvg(fileContent));
           }
 
           if (deleteOriginal) {
