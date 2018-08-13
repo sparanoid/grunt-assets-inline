@@ -30,8 +30,8 @@ exports.assets_inline = {
   default_options: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
+    var actual = grunt.file.read('tmp/default_options.html');
+    var expected = grunt.file.read('test/expected/default_options.html');
     test.equal(actual, expected, 'should describe what the default behavior is.');
 
     test.done();
@@ -39,8 +39,8 @@ exports.assets_inline = {
   minify: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/minify');
-    var expected = grunt.file.read('test/expected/minify');
+    var actual = grunt.file.read('tmp/minify.html');
+    var expected = grunt.file.read('test/expected/minify.html');
     test.equal(actual, expected, 'tests minified css');
 
     test.done();
@@ -48,8 +48,8 @@ exports.assets_inline = {
   inline_img: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/inline_img');
-    var expected = grunt.file.read('test/expected/inline_img');
+    var actual = grunt.file.read('tmp/inline_img.html');
+    var expected = grunt.file.read('test/expected/inline_img.html');
     test.equal(actual, expected, 'tests inline css images');
 
     test.done();
@@ -57,8 +57,8 @@ exports.assets_inline = {
   inline_svg: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/inline_svg');
-    var expected = grunt.file.read('test/expected/inline_svg');
+    var actual = grunt.file.read('tmp/inline_svg.html');
+    var expected = grunt.file.read('test/expected/inline_svg.html');
     test.equal(actual, expected, 'tests inline images');
 
     test.done();
@@ -66,8 +66,8 @@ exports.assets_inline = {
   inline_svg_base64: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/inline_svg_base64');
-    var expected = grunt.file.read('test/expected/inline_svg_base64');
+    var actual = grunt.file.read('tmp/inline_svg_base64.html');
+    var expected = grunt.file.read('test/expected/inline_svg_base64.html');
     test.equal(actual, expected, 'tests inline images');
 
     test.done();
@@ -75,8 +75,8 @@ exports.assets_inline = {
   include_tag: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/include_tag');
-    var expected = grunt.file.read('test/expected/include_tag');
+    var actual = grunt.file.read('tmp/include_tag.html');
+    var expected = grunt.file.read('test/expected/include_tag.html');
     test.equal(actual, expected, 'tests inline images');
 
     test.done();
@@ -84,8 +84,8 @@ exports.assets_inline = {
   all: function(test){
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/all');
-    var expected = grunt.file.read('test/expected/all');
+    var actual = grunt.file.read('tmp/all.html');
+    var expected = grunt.file.read('test/expected/all.html');
     test.equal(actual, expected, 'tests inline images');
 
     test.done();
