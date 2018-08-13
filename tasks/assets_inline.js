@@ -53,36 +53,36 @@ module.exports = function(grunt) {
       end: '</script>'
     };
 
-    var uglifyJS = function (i) { return i; };
+    var uglifyJS = function(i) { return i; };
 
     if (options.minify) {
-      uglifyJS = function (input) {
-        return uglifyjs.minify(input, {fromString: true}).code;
+      uglifyJS = function(input) {
+        return uglifyjs.minify(input, { fromString: true }).code;
       };
     }
 
-    var processSvg = function (i) { return i; };
+    var processSvg = function(i) { return i; };
 
-    processSvg = function(input){
+    processSvg = function(input) {
       // replace double quotes with single quotes and remove line breaks for non-base64 SVG inlining.
       return input.replace(/"/g, "'").replace(/(?:\r\n|\r|\n)/g, "");
     };
 
-    var getAttributes = function (el) {
+    var getAttributes = function(el) {
       var attributes = {};
       for (var index in el.attr) {
         var attr = el.attr[index];
         if (options.verbose) {
           grunt.log.writeln(('   attr: ').blue + index + ":" + attr);
         }
-        attributes[ index ] = attr;
+        attributes[index] = attr;
       }
       return attributes;
     };
 
     var filesToDelete = [];
 
-    var checkDelete = function (src) {
+    var checkDelete = function(src) {
       if (src.includes(options.assetsDelete)) {
         return true;
       }
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 
     this.files.forEach(function(filePair) {
       // Check that the source file exists
-      if(filePair.src.length === 0) { return; }
+      if (filePair.src.length === 0) { return; }
 
       // init cheerio
       var $ = cheerio.load(grunt.file.read(filePair.src), {
@@ -110,9 +110,9 @@ module.exports = function(grunt) {
       grunt.log.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
 
       // Assets inside inline `<style>` => inline assets
-      $('style[data-assets-inline]').each(function () {
+      $('style[data-assets-inline]').each(function() {
         var style = $(this).html();
-        if(!style) { return; }
+        if (!style) { return; }
 
         var items = [];
         // https://regex101.com/r/yP1yK0/1
@@ -131,7 +131,7 @@ module.exports = function(grunt) {
           if (url.parse(src).protocol) { return; }
           var deleteOriginal = checkDelete(src);
 
-          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+          var filePath = (src.substr(0, 1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
           if (options.inlineSvgBase64) {
             style = style.replace(src, 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
@@ -151,27 +151,27 @@ module.exports = function(grunt) {
       });
 
       // External stylesheets => inline stylesheets
-      $('link[rel="stylesheet"]').each(function () {
+      $('link[rel="stylesheet"]').each(function() {
         var style = $(this).attr('href');
-        if(!style) { return; }
-        if(style.match(/^\/\//)) { return; }
-        if(style.indexOf(options.includeTag) === -1) { return; }
+        if (!style) { return; }
+        if (style.match(/^\/\//)) { return; }
+        if (style.indexOf(options.includeTag) === -1) { return; }
         var deleteOriginal = checkDelete(style);
         style = style.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
         var attributes = getAttributes($(this));
-        if (attributes.href){
+        if (attributes.href) {
           //don't want to re-include the href
           delete attributes.href;
         }
-        if (attributes.rel){
+        if (attributes.rel) {
           //don't want to rel
           delete attributes.rel;
         }
 
-        if(url.parse(style).protocol) { return; }
-        var filePath = (style.substr(0,1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
+        if (url.parse(style).protocol) { return; }
+        var filePath = (style.substr(0, 1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
         $(this).replaceWith(options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end);
 
         if (deleteOriginal) {
@@ -183,22 +183,22 @@ module.exports = function(grunt) {
       });
 
       // Scripts inside `<script>` = inlne scripts
-      $('script').each(function () {
+      $('script').each(function() {
         var script = $(this).attr('src');
-        if(!script) { return; }
-        if(script.match(/^\/\//)) { return; }
-        if(script.indexOf(options.includeTag) === -1) { return; }
-        if(url.parse(script).protocol) { return; }
+        if (!script) { return; }
+        if (script.match(/^\/\//)) { return; }
+        if (script.indexOf(options.includeTag) === -1) { return; }
+        if (url.parse(script).protocol) { return; }
         var deleteOriginal = checkDelete(script);
         script = script.replace(/\?.+$/, "");
 
         //get attributes to keep them on the new element
         var attributes = getAttributes($(this));
-        if (attributes.src){
+        if (attributes.src) {
           delete attributes.src;
         }
 
-        var filePath = (script.substr(0,1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src.toString()), script);
+        var filePath = (script.substr(0, 1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src.toString()), script);
 
         //create and replace script with new scipt tag
         $(this).replaceWith(options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end);
@@ -213,16 +213,16 @@ module.exports = function(grunt) {
 
       // Assets inside `<link>`, most for favicons
       if (options.inlineLinkTags) {
-        $('link').each(function () {
+        $('link').each(function() {
           var src = $(this).attr('href');
-          if(!src) { return; }
-          if(src.match(/^\/\//)) { return; }
-          if(src.indexOf(options.includeTag) === -1) { return; }
-          if(url.parse(src).protocol) { return; }
+          if (!src) { return; }
+          if (src.match(/^\/\//)) { return; }
+          if (src.indexOf(options.includeTag) === -1) { return; }
+          if (url.parse(src).protocol) { return; }
           var deleteOriginal = checkDelete(src);
           src = src.replace(/\?.+$/, '');
 
-          var filePath = (src.substr(0,1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+          var filePath = (src.substr(0, 1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
           if (src.match(/.svg$/i)) {
             if (options.inlineSvgBase64) {
@@ -237,7 +237,7 @@ module.exports = function(grunt) {
           }
 
           if (src.match(/.(?:png|jpg)$/i)) {
-            $(this).attr('href', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+            $(this).attr('href', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
           }
 
           if (deleteOriginal) {
@@ -250,7 +250,7 @@ module.exports = function(grunt) {
       }
 
       if (options.inlineSvg) {
-        $('img').each(function () {
+        $('img').each(function() {
           var src = $(this).attr('src');
           if (!src) { return; }
           if (src.match(/^\/\//)) { return; }
@@ -258,7 +258,7 @@ module.exports = function(grunt) {
           if (url.parse(src).protocol) { return; }
           var deleteOriginal = checkDelete(src);
 
-          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+          var filePath = (src.substr(0, 1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
           if (options.inlineSvgBase64) {
             $(this).attr('src', 'data:image/svg+xml;base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
@@ -276,7 +276,7 @@ module.exports = function(grunt) {
       }
 
       if (options.inlineImg) {
-        $('img').each(function () {
+        $('img').each(function() {
           var src = $(this).attr('src');
           if (!src) { return; }
           if (src.match(/^\/\//)) { return; }
@@ -284,9 +284,9 @@ module.exports = function(grunt) {
           if (url.parse(src).protocol) { return; }
           var deleteOriginal = checkDelete(src);
 
-          var filePath = (src.substr(0,1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+          var filePath = (src.substr(0, 1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
-          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.')+1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+          $(this).attr('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer(grunt.file.read(filePath, { encoding: null })).toString('base64'));
 
           if (deleteOriginal) {
             grunt.log.writeln((' delete: ').gray + filePath);
