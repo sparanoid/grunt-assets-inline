@@ -1,3 +1,18 @@
+<a name="0.1.20"></a>
+## [0.1.20](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.19...v0.1.20) (2018-08-15)
+
+
+### Bug Fixes
+
+* **tasks:** unwanted url replaced, fix https://github.com/sparanoid/grunt-assets-inline/issu ([1757838](https://github.com/sparanoid/grunt-assets-inline/commit/1757838))
+
+### Features
+
+* no more cheerio, jsdom to the rescue ([369e7a8](https://github.com/sparanoid/grunt-assets-inline/commit/369e7a8))
+* update output ([5aa0908](https://github.com/sparanoid/grunt-assets-inline/commit/5aa0908))
+
+
+
 <a name="0.1.19"></a>
 ## [0.1.19](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.18...v0.1.19) (2017-01-20)
 
