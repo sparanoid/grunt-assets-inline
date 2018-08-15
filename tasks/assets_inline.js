@@ -152,7 +152,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('  inlined media in <style>: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('  media in <style>: ').blue + filePath + deleteFlag);
             }
           });
 
@@ -198,7 +198,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('        inlined stylesheet: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('     css in <link>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -237,7 +237,7 @@ module.exports = function(grunt) {
               filesToDelete.push(filePath);
               deleteFlag = (' (will remove)').red;
             }
-            grunt.log.writeln(('            inlined script: ').blue + filePath + deleteFlag);
+            grunt.log.writeln(('          <script>: ').blue + filePath + deleteFlag);
           }
         }
       }
@@ -284,7 +284,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('          inlined link tag: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('   media in <link>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -320,7 +320,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('               inlined svg: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('             <svg>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -351,7 +351,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('               inlined img: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('             <img>: ').blue + filePath + deleteFlag);
             }
           }
         }
