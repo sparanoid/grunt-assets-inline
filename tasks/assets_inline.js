@@ -147,12 +147,12 @@ module.exports = function(grunt) {
                 style = style.replace(src, 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
               }
 
+              var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
-                grunt.log.writeln((' inlined media in <style> - delete: ').gray + filePath);
                 filesToDelete.push(filePath);
-              } else {
-                grunt.log.writeln(('   inlined media in <style> - keep: ').blue + filePath);
+                deleteFlag = (' (will remove)').red;
               }
+              grunt.log.writeln(('  inlined media in <style>: ').blue + filePath + deleteFlag);
             }
           });
 
@@ -193,12 +193,12 @@ module.exports = function(grunt) {
               var filePath = (style.substr(0, 1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
               styles_dom_link_stylesheets[i].outerHTML = options.cssTags.start + grunt.file.read(filePath) + options.cssTags.end;
 
+              var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
-                grunt.log.writeln((' inlined stylesheet - delete: ').gray + filePath);
                 filesToDelete.push(filePath);
-              } else {
-                grunt.log.writeln(('   inlined stylesheet - keep: ').blue + filePath);
+                deleteFlag = (' (will remove)').red;
               }
+              grunt.log.writeln(('        inlined stylesheet: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -232,12 +232,12 @@ module.exports = function(grunt) {
             //create and replace script with new scipt tag
             scripts_dom[i].outerHTML = options.jsTags.start + uglifyJS(grunt.file.read(filePath)) + options.jsTags.end;
 
+            var deleteFlag = (' (will keep)').gray;
             if (deleteOriginal) {
-              grunt.log.writeln((' inlined script - delete: ').gray + filePath);
               filesToDelete.push(filePath);
-            } else {
-              grunt.log.writeln(('   inlined script - keep: ').blue + filePath);
+              deleteFlag = (' (will remove)').red;
             }
+            grunt.log.writeln(('            inlined script: ').blue + filePath + deleteFlag);
           }
         }
       }
@@ -279,12 +279,12 @@ module.exports = function(grunt) {
                 links_dom[i].setAttribute('href', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
               }
 
+              var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
-                grunt.log.writeln((' inlined link tag - delete: ').gray + filePath);
                 filesToDelete.push(filePath);
-              } else {
-                grunt.log.writeln(('   inlined link tag - keep: ').blue + filePath);
+                deleteFlag = (' (will remove)').red;
               }
+              grunt.log.writeln(('          inlined link tag: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -315,12 +315,12 @@ module.exports = function(grunt) {
                 item.setAttribute('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
               }
 
+              var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
-                grunt.log.writeln((' inline_svg - delete: ').gray + filePath);
                 filesToDelete.push(filePath);
-              } else {
-                grunt.log.writeln(('   inline_svg - keep: ').blue + filePath);
+                deleteFlag = (' (will remove)').red;
               }
+              grunt.log.writeln(('               inlined svg: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -346,12 +346,12 @@ module.exports = function(grunt) {
               var filePath = (src.substr(0, 1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
               item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
 
+              var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
-                grunt.log.writeln((' inline_img - delete: ').gray + filePath);
                 filesToDelete.push(filePath);
-              } else {
-                grunt.log.writeln(('   inline_img - keep: ').blue + filePath);
+                deleteFlag = (' (will remove)').red;
               }
+              grunt.log.writeln(('               inlined img: ').blue + filePath + deleteFlag);
             }
           }
         }
