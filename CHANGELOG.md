@@ -1,3 +1,14 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.20...v1.0.0) (2018-08-20)
+
+
+### Features
+
+* update uglifyjs@3 ([0b3c38a](https://github.com/sparanoid/grunt-assets-inline/commit/0b3c38a))
+* **test:** add test for file size limit ([5b6c2b3](https://github.com/sparanoid/grunt-assets-inline/commit/5b6c2b3))
+
+
+
 <a name="0.1.20"></a>
 ## [0.1.20](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.19...v0.1.20) (2018-08-15)
 
