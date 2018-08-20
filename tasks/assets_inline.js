@@ -133,9 +133,9 @@ module.exports = function(grunt) {
 
             } else if (src.match(/^\/\//)) {
 
-            } else  if (!src.match(/.svg$/i)) {
-
             } else if (url.parse(src).protocol) {
+
+            } else if (!src.match(/.svg$/i)) {
 
             } else {
               var deleteOriginal = checkDelete(src);
@@ -153,7 +153,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('  media in <style>: ').blue + filePath + deleteFlag);
+              grunt.log.writeln(('    svg in <style>: ').blue + filePath + deleteFlag);
             }
           });
 
@@ -313,7 +313,7 @@ module.exports = function(grunt) {
               var fileSize = fileContent.length / 1024;
 
               if (options.inlineSvgFileLimit && fileSize > options.inlineSvgFileLimit) {
-                grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
+                grunt.log.writeln(('             <svg>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB)').yellow);
               } else {
                 if (options.inlineSvgBase64) {
                   item.setAttribute('src', 'data:image/svg+xml;base64,' + new Buffer.from(fileContent).toString('base64'));
@@ -344,9 +344,9 @@ module.exports = function(grunt) {
 
             } else if (src.match(/^\/\//)) {
 
-            } else if (src.match(/.svg$/i)) {
-
             } else if (url.parse(src).protocol) {
+
+            } else if (src.match(/.svg$/i)) {
 
             } else {
               var deleteOriginal = checkDelete(src);
@@ -354,8 +354,8 @@ module.exports = function(grunt) {
               var fileContent = grunt.file.read(filePath, { encoding: null });
               var fileSize = fileContent.length / 1024;
 
-              if (options.inlineImgFileLimit && fileSize <= options.inlineImgFileLimit) {
-                grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
+              if (options.inlineImgFileLimit && fileSize > options.inlineImgFileLimit) {
+                grunt.log.writeln(('             <img>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB)').yellow);
               } else {
                 item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(fileContent).toString('base64'));
 

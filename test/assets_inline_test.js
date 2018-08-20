@@ -81,6 +81,15 @@ exports.assets_inline = {
 
     test.done();
   },
+  size_limit: function(test){
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/size_limit.html');
+    var expected = grunt.file.read('test/expected/size_limit.html');
+    test.equal(actual, expected, 'tests image size limit');
+
+    test.done();
+  },
   all: function(test){
     test.expect(1);
 
