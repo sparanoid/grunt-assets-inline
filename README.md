@@ -1,4 +1,5 @@
 # grunt-assets-inline
+[![Greenkeeper badge](https://badges.greenkeeper.io/sparanoid/grunt-assets-inline.svg)](https://greenkeeper.io/)
 [![Build Status](https://api.travis-ci.org/sparanoid/grunt-assets-inline.svg?branch=master)](https://travis-ci.org/sparanoid/grunt-assets-inline)
 [![Dependency Status](https://david-dm.org/sparanoid/grunt-assets-inline.svg)](https://david-dm.org/sparanoid/grunt-assets-inline)
 [![devDependency Status](https://david-dm.org/sparanoid/grunt-assets-inline/dev-status.svg)](https://david-dm.org/sparanoid/grunt-assets-inline#info=devDependencies)

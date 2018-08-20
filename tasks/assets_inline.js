@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 
     if (options.minify) {
       uglifyJS = function(input) {
-        return uglifyjs.minify(input, { fromString: true }).code;
+        return uglifyjs.minify(input).code;
       };
     }
 
