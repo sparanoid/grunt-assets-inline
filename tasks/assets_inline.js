@@ -143,7 +143,7 @@ module.exports = function(grunt) {
               var filePath = (src.substr(0, 1) === '/') ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
 
               if (options.inlineSvgBase64) {
-                style = style.replace(src, 'data:image/svg+xml;base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+                style = style.replace(src, 'data:image/svg+xml;base64,' + Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
               } else {
                 style = style.replace(src, 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
               }
@@ -266,18 +266,18 @@ module.exports = function(grunt) {
 
               if (src.match(/.svg$/i)) {
                 if (options.inlineSvgBase64) {
-                  links_dom[i].setAttribute('href', 'data:image/svg+xml;base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+                  links_dom[i].setAttribute('href', 'data:image/svg+xml;base64,' + Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
                 } else {
                   links_dom[i].setAttribute('href', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
                 }
               }
 
               if (src.match(/.ico$/i)) {
-                links_dom[i].setAttribute('href', 'data:image/x-icon;base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+                links_dom[i].setAttribute('href', 'data:image/x-icon;base64,' + Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
               }
 
               if (src.match(/.(?:png|jpg)$/i)) {
-                links_dom[i].setAttribute('href', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+                links_dom[i].setAttribute('href', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
               }
 
               var deleteFlag = (' (will keep)').gray;
@@ -316,7 +316,7 @@ module.exports = function(grunt) {
                 grunt.log.writeln(('             <svg>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineSvgFileLimit + ' KB)').yellow);
               } else {
                 if (options.inlineSvgBase64) {
-                  item.setAttribute('src', 'data:image/svg+xml;base64,' + new Buffer.from(fileContent).toString('base64'));
+                  item.setAttribute('src', 'data:image/svg+xml;base64,' + Buffer.from(fileContent).toString('base64'));
                 } else {
                   item.setAttribute('src', 'data:image/svg+xml;utf8,' + processSvg(fileContent));
                 }
@@ -357,7 +357,7 @@ module.exports = function(grunt) {
               if (options.inlineImgFileLimit && fileSize > options.inlineImgFileLimit) {
                 grunt.log.writeln(('             <img>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineImgFileLimit + ' KB)').yellow);
               } else {
-                item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(fileContent).toString('base64'));
+                item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + Buffer.from(fileContent).toString('base64'));
 
                 var deleteFlag = (' (will keep)').gray;
                 if (deleteOriginal) {
