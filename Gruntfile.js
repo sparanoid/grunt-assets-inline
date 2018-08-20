@@ -32,7 +32,7 @@ module.exports = function(grunt) {
     assets_inline: {
       default_options: {
         files: {
-          'tmp/default_options': 'test/fixtures/index.html',
+          'tmp/default_options.html': 'test/fixtures/index.html',
         },
       },
       minify: {
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
           inlineSvgBase64: false
         },
         files: {
-          'tmp/minify': 'test/fixtures/index.html',
+          'tmp/minify.html': 'test/fixtures/index.html',
         },
       },
       inline_img: {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
           inlineSvgBase64: false
         },
         files: {
-          'tmp/inline_img': 'test/fixtures/index.html',
+          'tmp/inline_img.html': 'test/fixtures/index.html',
         },
       },
       inline_svg: {
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
           inlineSvgBase64: false
         },
         files: {
-          'tmp/inline_svg': 'test/fixtures/index.html',
+          'tmp/inline_svg.html': 'test/fixtures/index.html',
         },
       },
       inline_svg_base64: {
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           inlineSvgBase64: true
         },
         files: {
-          'tmp/inline_svg_base64': 'test/fixtures/index.html',
+          'tmp/inline_svg_base64.html': 'test/fixtures/index.html',
         },
       },
       include_tag: {
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
           includeTag: "?assets-inline"
         },
         files: {
-          'tmp/include_tag': 'test/fixtures/index.html',
+          'tmp/include_tag.html': 'test/fixtures/index.html',
         },
       },
       all: {
@@ -100,11 +100,12 @@ module.exports = function(grunt) {
           inlineImg: true,
           inlineSvg: true,
           inlineSvgBase64: true,
+          inlineLinkTags: true,
           includeTag: "",
           assetsUrlPrefix: "/lab/test/"
         },
         files: {
-          'tmp/all': 'test/fixtures/index.html',
+          'tmp/all.html': 'test/fixtures/index.html',
         },
       }
     },
