@@ -50,7 +50,7 @@ grunt.initConfig({
 
 ### Options
 
-#### Script Minification
+#### `minify`
 
 Defaults to `false`.
 
@@ -105,7 +105,7 @@ If the local cwd for your uncompiled file is `/project/html` then the above sett
 
 `<img src="/assets/svg/header.svg">` will use a local file at `/project/assets/svg/header.svg`
 
-#### Inline Images
+#### `inlineImg`
 
 Defaults to `false`.
 
@@ -126,7 +126,7 @@ grunt.initConfig({
 });
 ```
 
-#### Inline SVGs
+#### `inlineSvg`
 
 Defaults to `true`.
 
@@ -149,9 +149,9 @@ grunt.initConfig({
 
 `<img src="src/to/header.svg">` will turn into `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2175...`.
 
-#### Inline SVGs with Base64
+#### `inlineSvgBase64`
 
-Defaults to `false`.
+Inline SVGs with Base64. Defaults to `false`.
 
 ```js
 grunt.initConfig({
@@ -175,9 +175,9 @@ SVG images are inlined directly into HTML by default. To have more compatibility
 
 Please note that Base64 generated files are always slightly bigger than the original files.
 
-#### Inline `link` Tags
+#### `inlineLinkTags`
 
-Defaults to `false`.
+Inline `link` Tags. Defaults to `false`.
 
 If you want to smoosh images inside your `link` tags, for example favicons, you can set `inlineLinkTags` to true.
 
@@ -196,9 +196,9 @@ grunt.initConfig({
 });
 ```
 
-#### Additional Assets URL Prefix
+#### `assetsUrlPrefix`
 
-If you have assets in CSS or JS (for example images, fonts, SVGs), smooshing CSS or JS into HTMLs may break relative URLs, so you may have to replace the original URLs to absolute URLs.
+Additional Assets URL Prefix. If you have assets in CSS or JS (for example images, fonts, SVGs), smooshing CSS or JS into HTMLs may break relative URLs, so you may have to replace the original URLs to absolute URLs.
 
 This option only searchs for URLs begin with `../`.
 
@@ -217,7 +217,7 @@ grunt.initConfig({
 });
 ```
 
-#### includeTag
+#### `includeTag`
 
 Defaults to `""`.
 
@@ -244,7 +244,7 @@ For example the above configuration only smoosh filenames with `?assets-inline` 
 <link href="/assets/css/styles.css?assets-inline">
 ```
 
-#### cssTags
+#### `cssTags`
 
 Defaults to
 
@@ -255,7 +255,7 @@ Defaults to
 }
 ```
 
-#### jsTags
+#### `jsTags`
 
 Defaults to
 
@@ -266,7 +266,7 @@ Defaults to
 }
 ```
 
-#### deleteOriginals
+#### `deleteOriginals`
 
 Defaults to
 
@@ -278,7 +278,7 @@ Defaults to
 
 You can delete smooshed files after the main task. Please note that once a file is smooshed into the HTML, it will marked as pending delete, no matter if it is included elsewhere without smooshing.
 
-#### verbose
+#### `verbose`
 
 Defaults to
 
