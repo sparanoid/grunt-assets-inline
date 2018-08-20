@@ -14,11 +14,12 @@
     "gunderson <pat@theorigin.net>",
     "Gabriel Florit <gabrielflorit@gmail.com>",
     "greenkeeperio-bot <support@greenkeeper.io>",
-    "Greenkeeper <support@greenkeeper.io>",
+    "Kyrylo Shavaran <alltouch@ukr.net>",
     "yvind Smestad <oyvind.smestad@wimpmusic.com>",
     "Dominik Schreiber <domischreib@gmail.com>",
     "gruntjs-updater <updater@gruntjs.com>",
-    "tenKinetic <tenkinetic@gmail.com>"
+    "tenKinetic <tenkinetic@gmail.com>",
+    "Greenkeeper <support@greenkeeper.io>"
   ],
   "repository": {
     "type": "git",
