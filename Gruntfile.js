@@ -91,6 +91,19 @@ module.exports = function(grunt) {
           'tmp/include_tag.html': 'test/fixtures/index.html',
         },
       },
+      size_limit: {
+        options: {
+          minify: false,
+          inlineImg: true,
+          inlineImgFileLimit: 40,
+          inlineSvg: true,
+          inlineSvgBase64: true,
+          inlineSvgFileLimit: 2
+        },
+        files: {
+          'tmp/size_limit.html': 'test/fixtures/index.html',
+        },
+      },
       all: {
         options: {
           jsDir: "",
