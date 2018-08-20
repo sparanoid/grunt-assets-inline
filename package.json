@@ -39,18 +39,18 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "jsdom": "^11.11.0",
-    "uglify-js": "^2.7.5"
+    "jsdom": "^12.0.0",
+    "uglify-js": "^3.4.7"
   },
   "devDependencies": {
     "grunt": "^1.0.3",
     "grunt-bump": "^0.8.0",
-    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-nodeunit": "^2.0.0",
     "grunt-conventional-changelog": "^6.1.0",
     "grunt-npm": "0.0.2",
-    "matchdep": "^1.0.1",
+    "matchdep": "^2.0.0",
     "time-grunt": "^1.4.0"
   },
   "keywords": [
