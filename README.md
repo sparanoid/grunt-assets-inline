@@ -126,6 +126,28 @@ grunt.initConfig({
 });
 ```
 
+#### `inlineImgFileLimit`
+
+Defaults to `undefined`.
+
+If you want to smoosh `img` only smaller than certain size, use `inlineImgFileLimit`.
+
+```js
+grunt.initConfig({
+  assets_inline: {
+    all: {
+      options: {
+        inlineImg: true,
+        inlineImgFileLimit: 20 // 20 KB
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
+
 #### `inlineSvg`
 
 Defaults to `true`.
@@ -148,6 +170,28 @@ grunt.initConfig({
 ```
 
 `<img src="src/to/header.svg">` will turn into `<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='2175...`.
+
+#### `inlineSvgFileLimit`
+
+Defaults to `undefined`.
+
+If you want to smoosh `svg` only smaller than certain size, use `inlineSvgFileLimit`.
+
+```js
+grunt.initConfig({
+  assets_inline: {
+    all: {
+      options: {
+        inlineSvg: true,
+        inlineSvgFileLimit: 40 // 40 KB
+      },
+      files: {
+        'dest-index.html': 'source-index.html',
+      },
+    },
+  },
+});
+```
 
 #### `inlineSvgBase64`
 
