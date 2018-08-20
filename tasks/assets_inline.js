@@ -33,8 +33,10 @@ module.exports = function(grunt) {
       assetsDir: "",
       minify: false,
       inlineImg: false,
+      inlineImgFileLimit: undefined,
       inlineSvg: true,
       inlineSvgBase64: false,
+      inlineSvgFileLimit: undefined,
       inlineLinkTags: false,
       includeTag: "",
       assetsUrlPrefix: "",
@@ -42,7 +44,6 @@ module.exports = function(grunt) {
       deleteOriginals: false,
       assetsKeep: "assets-keep",
       assetsDelete: "assets-delete"
-
     });
 
     options.cssTags = this.options().cssTags || {
@@ -308,19 +309,25 @@ module.exports = function(grunt) {
             } else {
               var deleteOriginal = checkDelete(src);
               var filePath = (src.substr(0, 1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
+              var fileContent = options.inlineSvgBase64 ? grunt.file.read(filePath, { encoding: null }) : grunt.file.read(filePath);
+              var fileSize = fileContent.length / 1024;
 
-              if (options.inlineSvgBase64) {
-                item.setAttribute('src', 'data:image/svg+xml;base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+              if (options.inlineSvgFileLimit && fileSize > options.inlineSvgFileLimit) {
+                grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
               } else {
-                item.setAttribute('src', 'data:image/svg+xml;utf8,' + processSvg(grunt.file.read(filePath)));
-              }
+                if (options.inlineSvgBase64) {
+                  item.setAttribute('src', 'data:image/svg+xml;base64,' + new Buffer.from(fileContent).toString('base64'));
+                } else {
+                  item.setAttribute('src', 'data:image/svg+xml;utf8,' + processSvg(fileContent));
+                }
 
-              var deleteFlag = (' (will keep)').gray;
-              if (deleteOriginal) {
-                filesToDelete.push(filePath);
-                deleteFlag = (' (will remove)').red;
+                var deleteFlag = (' (will keep)').gray;
+                if (deleteOriginal) {
+                  filesToDelete.push(filePath);
+                  deleteFlag = (' (will remove)').red;
+                }
+                grunt.log.writeln(('             <svg>: ').blue + filePath + deleteFlag);
               }
-              grunt.log.writeln(('             <svg>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -344,14 +351,21 @@ module.exports = function(grunt) {
             } else {
               var deleteOriginal = checkDelete(src);
               var filePath = (src.substr(0, 1) === "/") ? path.resolve(options.assetsDir, src.substr(1)) : path.join(path.dirname(filePair.src.toString()), src);
-              item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(grunt.file.read(filePath, { encoding: null })).toString('base64'));
+              var fileContent = grunt.file.read(filePath, { encoding: null });
+              var fileSize = fileContent.length / 1024;
 
-              var deleteFlag = (' (will keep)').gray;
-              if (deleteOriginal) {
-                filesToDelete.push(filePath);
-                deleteFlag = (' (will remove)').red;
+              if (options.inlineImgFileLimit && fileSize <= options.inlineImgFileLimit) {
+                grunt.log.writeln(('   keep(file size: ' + fileSize + ') :').blue + filePath);
+              } else {
+                item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + new Buffer.from(fileContent).toString('base64'));
+
+                var deleteFlag = (' (will keep)').gray;
+                if (deleteOriginal) {
+                  filesToDelete.push(filePath);
+                  deleteFlag = (' (will remove)').red;
+                }
+                grunt.log.writeln(('             <img>: ').blue + filePath + deleteFlag);
               }
-              grunt.log.writeln(('             <img>: ').blue + filePath + deleteFlag);
             }
           }
         }
