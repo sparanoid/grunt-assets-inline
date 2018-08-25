@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/sparanoid/grunt-assets-inline/compare/v1.0.0...v1.0.1) (2018-08-25)
+
+
+### Bug Fixes
+
+* **tasks:** wrong assets url replaced ([8766c08](https://github.com/sparanoid/grunt-assets-inline/commit/8766c08))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/sparanoid/grunt-assets-inline/compare/v0.1.20...v1.0.0) (2018-08-20)
 
