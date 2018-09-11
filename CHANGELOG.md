@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/sparanoid/grunt-assets-inline/compare/v1.0.1...v1.1.0) (2018-09-11)
+
+
+### Bug Fixes
+
+* **tarsks:** revert 8766c08, it doesn't work when `assetsUrlPrefix` is set ([712f0ac](https://github.com/sparanoid/grunt-assets-inline/commit/712f0ac))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/sparanoid/grunt-assets-inline/compare/v1.0.0...v1.0.1) (2018-08-25)
 
