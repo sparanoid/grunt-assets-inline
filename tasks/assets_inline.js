@@ -192,7 +192,7 @@ module.exports = function(grunt) {
 
             } else {
               var filePath = (style.substr(0, 1) === "/") ? path.resolve(options.cssDir, style.substr(1)) : path.join(path.dirname(filePair.src.toString()), style);
-              styles_dom_link_stylesheets[i].outerHTML = options.cssTags.start + grunt.file.read(filePath).replace(/(\.{2}\/)+/g, options.assetsUrlPrefix + '/') + options.cssTags.end;
+              styles_dom_link_stylesheets[i].outerHTML = options.cssTags.start + grunt.file.read(filePath).replace(/(\.{2}\/)+/g, options.assetsUrlPrefix) + options.cssTags.end;
 
               var deleteFlag = (' (will keep)').gray;
               if (deleteOriginal) {
@@ -231,7 +231,7 @@ module.exports = function(grunt) {
             var filePath = (script.substr(0, 1) === "/") ? path.resolve(options.jsDir, script.substr(1)) : path.join(path.dirname(filePair.src.toString()), script);
 
             //create and replace script with new scipt tag
-            scripts_dom[i].outerHTML = options.jsTags.start + uglifyJS(grunt.file.read(filePath).replace(/(\.{2}\/)+/g, options.assetsUrlPrefix + '/')) + options.jsTags.end;
+            scripts_dom[i].outerHTML = options.jsTags.start + uglifyJS(grunt.file.read(filePath).replace(/(\.{2}\/)+/g, options.assetsUrlPrefix)) + options.jsTags.end;
 
             var deleteFlag = (' (will keep)').gray;
             if (deleteOriginal) {
