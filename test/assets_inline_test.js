@@ -36,7 +36,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  minify: function(test){
+  minify: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/minify.html');
@@ -45,7 +45,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  inline_img: function(test){
+  inline_img: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/inline_img.html');
@@ -54,7 +54,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  inline_svg: function(test){
+  inline_svg: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/inline_svg.html');
@@ -63,7 +63,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  inline_svg_base64: function(test){
+  inline_svg_base64: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/inline_svg_base64.html');
@@ -72,7 +72,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  include_tag: function(test){
+  include_tag: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/include_tag.html');
@@ -81,7 +81,7 @@ exports.assets_inline = {
 
     test.done();
   },
-  size_limit: function(test){
+  size_limit: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/size_limit.html');
@@ -90,7 +90,16 @@ exports.assets_inline = {
 
     test.done();
   },
-  all: function(test){
+  fragment: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/fragment.html');
+    var expected = grunt.file.read('test/expected/fragment.html');
+    test.equal(actual, expected, 'tests fragment html');
+
+    test.done();
+  },
+  all: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/all.html');
