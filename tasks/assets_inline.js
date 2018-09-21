@@ -32,6 +32,7 @@ module.exports = function(grunt) {
       cssDir: "",
       assetsDir: "",
       minify: false,
+      serialize: true,
       inlineImg: false,
       inlineImgFileLimit: undefined,
       inlineSvg: true,
@@ -371,7 +372,12 @@ module.exports = function(grunt) {
         }
       }
 
-      var html = dom.serialize();
+      if (options.serialize) {
+        var html = dom.serialize();
+      } else {
+        var html = dom.window.document.firstChild.outerHTML.replace(/<(\/?)(html|head|body)>/gm, '');
+      }
+
       grunt.file.write(path.resolve(filePair.dest), html);
       grunt.log.writeln(('Created: ').green + path.resolve(filePair.dest) + '\n');
     });
