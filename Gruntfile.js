@@ -104,6 +104,19 @@ module.exports = function(grunt) {
           'tmp/size_limit.html': 'test/fixtures/index.html',
         },
       },
+      fragment: {
+        options: {
+          minify: false,
+          serialize: false,
+          inlineImg: true,
+          inlineSvg: true,
+          inlineSvgBase64: true,
+          inlineLinkTags: true,
+        },
+        files: {
+          'tmp/fragment.html': 'test/fixtures/index-fragment.html',
+        },
+      },
       all: {
         options: {
           jsDir: "",
