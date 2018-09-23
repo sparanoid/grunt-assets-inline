@@ -49,7 +49,7 @@
     "grunt": "^1.0.3",
     "grunt-bump": "^0.8.0",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-nodeunit": "^2.0.0",
     "grunt-conventional-changelog": "^6.1.0",
     "grunt-npm": "0.0.2",
