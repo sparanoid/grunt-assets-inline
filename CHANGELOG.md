@@ -1,3 +1,13 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/sparanoid/grunt-assets-inline/compare/v1.1.1...v1.1.2) (2018-09-23)
+
+
+### Features
+
+* **task:** refine relative url for `assetsUrlPrefix` ([10a3831](https://github.com/sparanoid/grunt-assets-inline/commit/10a3831))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/sparanoid/grunt-assets-inline/compare/v1.1.0...v1.1.1) (2018-09-22)
 
