@@ -57,6 +57,10 @@ module.exports = function(grunt) {
       end: '</script>'
     };
 
+    var created = {
+      files: 0
+    };
+
     var uglifyJS = function(i) { return i; };
 
     if (options.minify) {
@@ -77,7 +81,7 @@ module.exports = function(grunt) {
       for (var index in el.attr) {
         var attr = el.attr[index];
         if (options.verbose) {
-          grunt.log.writeln(('   attr: ').blue + index + ":" + attr);
+          grunt.verbose.writeln(('   attr: ').blue + index + ":" + attr);
         }
         attributes[index] = attr;
       }
@@ -121,7 +125,7 @@ module.exports = function(grunt) {
       var dom = new JSDOM(grunt.file.read(filePair.src));
       var doc = dom.window.document;
 
-      grunt.log.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
+      grunt.verbose.writeln(('Reading: ').green + path.resolve(filePair.src.toString()));
 
       // Assets inside inline `<style>` => inline assets
       var styles_dom_assets_inline = doc.querySelectorAll('style[data-assets-inline]');
@@ -165,7 +169,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('    svg in <style>: ').blue + filePath + deleteFlag);
+              grunt.verbose.writeln(('    svg in <style>: ').blue + filePath + deleteFlag);
             }
           });
 
@@ -213,7 +217,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('     css in <link>: ').blue + filePath + deleteFlag);
+              grunt.verbose.writeln(('     css in <link>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -253,7 +257,7 @@ module.exports = function(grunt) {
               filesToDelete.push(filePath);
               deleteFlag = (' (will remove)').red;
             }
-            grunt.log.writeln(('          <script>: ').blue + filePath + deleteFlag);
+            grunt.verbose.writeln(('          <script>: ').blue + filePath + deleteFlag);
           }
         }
       }
@@ -300,7 +304,7 @@ module.exports = function(grunt) {
                 filesToDelete.push(filePath);
                 deleteFlag = (' (will remove)').red;
               }
-              grunt.log.writeln(('   media in <link>: ').blue + filePath + deleteFlag);
+              grunt.verbose.writeln(('   media in <link>: ').blue + filePath + deleteFlag);
             }
           }
         }
@@ -328,7 +332,7 @@ module.exports = function(grunt) {
               var fileSize = fileContent.length / 1024;
 
               if (options.inlineSvgFileLimit && fileSize > options.inlineSvgFileLimit) {
-                grunt.log.writeln(('             <svg>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineSvgFileLimit + ' KB)').yellow);
+                grunt.verbose.writeln(('             <svg>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineSvgFileLimit + ' KB)').yellow);
               } else {
                 if (options.inlineSvgBase64) {
                   item.setAttribute('src', 'data:image/svg+xml;base64,' + Buffer.from(fileContent).toString('base64'));
@@ -341,7 +345,7 @@ module.exports = function(grunt) {
                   filesToDelete.push(filePath);
                   deleteFlag = (' (will remove)').red;
                 }
-                grunt.log.writeln(('             <svg>: ').blue + filePath + deleteFlag);
+                grunt.verbose.writeln(('             <svg>: ').blue + filePath + deleteFlag);
               }
             }
           }
@@ -370,7 +374,7 @@ module.exports = function(grunt) {
               var fileSize = fileContent.length / 1024;
 
               if (options.inlineImgFileLimit && fileSize > options.inlineImgFileLimit) {
-                grunt.log.writeln(('             <img>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineImgFileLimit + ' KB)').yellow);
+                grunt.verbose.writeln(('             <img>: ').blue + filePath + (' (skipped: ' + fileSize.toFixed(2) + ' KB > ' + options.inlineImgFileLimit + ' KB)').yellow);
               } else {
                 item.setAttribute('src', 'data:image/' + src.substr(src.lastIndexOf('.') + 1) + ';base64,' + Buffer.from(fileContent).toString('base64'));
 
@@ -379,7 +383,7 @@ module.exports = function(grunt) {
                   filesToDelete.push(filePath);
                   deleteFlag = (' (will remove)').red;
                 }
-                grunt.log.writeln(('             <img>: ').blue + filePath + deleteFlag);
+                grunt.verbose.writeln(('             <img>: ').blue + filePath + deleteFlag);
               }
             }
           }
@@ -393,15 +397,25 @@ module.exports = function(grunt) {
       }
 
       grunt.file.write(path.resolve(filePair.dest), html);
-      grunt.log.writeln(('Created: ').green + path.resolve(filePair.dest) + '\n');
+      created.files++;
+
+      grunt.verbose.writeln(('Created: ').green + path.resolve(filePair.dest) + '\n');
     });
 
     // Delete the original files
     filesToDelete.forEach(function(filename) {
       if (grunt.file.exists(filename)) {
         grunt.file.delete(filename);
-        grunt.log.writeln(('Removed: ').green + filename);
+        grunt.verbose.writeln(('Removed: ').green + filename);
       }
     });
+
+    if (created.files > 0) {
+      grunt.log.ok(
+        created.files + ' ' + grunt.util.pluralize(created.files, 'file/files') + ' created, ' + filesToDelete.length + ' asset ' + grunt.util.pluralize(filesToDelete.length, 'file/files') + ' deleted.'
+      );
+    } else {
+      grunt.log.warn('No files created.');
+    }
   });
 };
