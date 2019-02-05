@@ -1,3 +1,14 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/sparanoid/grunt-assets-inline/compare/v1.1.3...v1.2.0) (2019-02-05)
+
+
+### Bug Fixes
+
+* **package:** update jsdom to version 13.0.0 ([81e0ec1](https://github.com/sparanoid/grunt-assets-inline/commit/81e0ec1))
+* **tasks:** non-base64 inline svg are not escaped correctly ([0986e7d](https://github.com/sparanoid/grunt-assets-inline/commit/0986e7d))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/sparanoid/grunt-assets-inline/compare/v1.1.1...v1.1.3) (2018-10-17)
 
