@@ -2,7 +2,7 @@
  * grunt-assets-inline
  * https://github.com/sparanoid/assets-inline
  *
- * Copyright (c) 2017 Tunghsiao Liu
+ * Copyright (c) 2019 Tunghsiao Liu
  * Licensed under the MIT license.
  */
 
