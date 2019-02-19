@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/sparanoid/grunt-assets-inline/compare/v1.2.0...v1.2.1) (2019-02-19)
+
+
+### Bug Fixes
+
+* potential security vulnerability ([c12fac6](https://github.com/sparanoid/grunt-assets-inline/commit/c12fac6))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/sparanoid/grunt-assets-inline/compare/v1.1.3...v1.2.0) (2019-02-05)
 
