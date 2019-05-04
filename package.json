@@ -13,16 +13,16 @@
     "greenkeeper[bot] <greenkeeper[bot]@users.noreply.github.com>",
     "Patrick Gunderson <patrick@toolofna.com>",
     "gunderson <pat@theorigin.net>",
+    "Renovate Bot <bot@renovateapp.com>",
     "Gabriel Florit <gabrielflorit@gmail.com>",
     "greenkeeperio-bot <support@greenkeeper.io>",
     "Kyrylo Shavaran <alltouch@ukr.net>",
-    "tenKinetic <tenkinetic@gmail.com>",
     "yvind Smestad <oyvind.smestad@wimpmusic.com>",
     "Greenkeeper <support@greenkeeper.io>",
-    "Renovate Bot <bot@renovateapp.com>",
     "Dominik Schreiber <domischreib@gmail.com>",
     "Chancellor Clark <chancellor_clark@vfc.com>",
-    "gruntjs-updater <updater@gruntjs.com>"
+    "gruntjs-updater <updater@gruntjs.com>",
+    "tenKinetic <tenkinetic@gmail.com>"
   ],
   "repository": {
     "type": "git",
