@@ -1,3 +1,18 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/sparanoid/grunt-assets-inline/compare/v1.2.1...v1.2.2) (2019-05-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v14 ([2b52376](https://github.com/sparanoid/grunt-assets-inline/commit/2b52376))
+* **deps:** update dependency jsdom to v15 ([b99d990](https://github.com/sparanoid/grunt-assets-inline/commit/b99d990))
+
+### Features
+
+* update deps ([2312b20](https://github.com/sparanoid/grunt-assets-inline/commit/2312b20))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/sparanoid/grunt-assets-inline/compare/v1.2.0...v1.2.1) (2019-02-19)
 
