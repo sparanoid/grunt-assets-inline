@@ -393,7 +393,7 @@ module.exports = function(grunt) {
       if (options.serialize) {
         var html = dom.serialize();
       } else {
-        var html = dom.window.document.firstChild.outerHTML.replace(/<(\/?)(html|head|body)>/gm, '');
+        var html = dom.window.document.children[0].outerHTML.replace(/<(\/?)(html|head|body)>/gm, '');
       }
 
       grunt.file.write(path.resolve(filePair.dest), html);
