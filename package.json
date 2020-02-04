@@ -15,14 +15,15 @@
     "gunderson <pat@theorigin.net>",
     "Renovate Bot <bot@renovateapp.com>",
     "Gabriel Florit <gabrielflorit@gmail.com>",
-    "greenkeeperio-bot <support@greenkeeper.io>",
     "Kyrylo Shavaran <alltouch@ukr.net>",
+    "greenkeeperio-bot <support@greenkeeper.io>",
     "yvind Smestad <oyvind.smestad@wimpmusic.com>",
-    "Greenkeeper <support@greenkeeper.io>",
-    "Dominik Schreiber <domischreib@gmail.com>",
     "Chancellor Clark <chancellor_clark@vfc.com>",
+    "Dominik Schreiber <domischreib@gmail.com>",
+    "Greenkeeper <support@greenkeeper.io>",
     "gruntjs-updater <updater@gruntjs.com>",
-    "tenKinetic <tenkinetic@gmail.com>"
+    "tenKinetic <tenkinetic@gmail.com>",
+    "printminion <320529+printminion@users.noreply.github.com>"
   ],
   "repository": {
     "type": "git",
