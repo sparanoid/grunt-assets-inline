@@ -1,3 +1,14 @@
+<a name="1.2.4"></a>
+## [1.2.4](https://github.com/sparanoid/grunt-assets-inline/compare/v1.2.3...v1.2.4) (2020-06-01)
+
+
+### Features
+
+* update deps ([fabddcd](https://github.com/sparanoid/grunt-assets-inline/commit/fabddcd))
+* update deps ([a806ae2](https://github.com/sparanoid/grunt-assets-inline/commit/a806ae2))
+
+
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/sparanoid/grunt-assets-inline/compare/v1.2.2...v1.2.3) (2020-02-04)
 
