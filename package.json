@@ -44,7 +44,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "jsdom": "^16.2.2",
+    "jsdom": "^25.0.0",
     "uglify-js": "^3.9.4"
   },
   "devDependencies": {
